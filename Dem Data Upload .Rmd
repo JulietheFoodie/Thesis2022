@@ -1,0 +1,65 @@
+---
+title: "Demographic Data Upload"
+author: "Julie Norman"
+date: '2022-06-10'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## State Demographic Data
+Source: https://corgis-edu.github.io/corgis/csv/state_demographics/
+
+```{r}
+dem_df <- read_csv("Data Sets/state_demographics.csv")
+
+dem_df$Expand <- ifelse(dem_df$State == "Wyoming" | dem_df$State ==  "South Dakota" | dem_df$State ==  "Wisconsin" | dem_df$State ==  "Kansas" | dem_df$State ==  "Tennessee" | dem_df$State ==  "Mississippi" | dem_df$State ==  "Alabama" | dem_df$State ==  "Georgia"  | dem_df$State ==  "North Carolina" | dem_df$State ==  "South Carolina" | dem_df$State ==  "Texas", 0, 1 )
+
+
+dem_df2 <- dem_df %>% 
+  filter((Expand == 0 |  State == "Indiana"|   State == "Illinois"|     State == "Louisiana"|    State == "Virginia" | State == "North Dakota"   | State == "Arkansas" | State == "North Dakota" | State == "Minnesota" | State == "Nevada" | State == "Indiana" | State == "Missouri") & State != "Texas")
+
+# State == "Michigan"| State == "Nebraska"| State == "West Virginia" | State == "Iowa"| | State == "Oklahoma"  | State == "Kentucky" | State == "Colorado" |  State == "Ohio"| State == "District of Columbia" | State == "Montana" | State == "Idaho" 
+
+
+demMd_df <- aggregate(dem_df2, list(dem_df2$Expand), median)
+
+dem_df2$Expand <- as.factor(dem_df2$Expand)
+
+demMn_df <- aggregate(dem_df2, list(dem_df2$Expand), mean)
+
+demSm_df <- dem_df2[, c( 3, 4)] %>% 
+  group_by(dem_df2$Expand) %>% 
+  summarise(`Population.2014 Population` = sum(`Population.2014 Population`), `Population.2010 Population` = sum(`Population.2010 Population`))
+
+#View(filter(dem_df, dem_df$Expand == 1))
+
+```
+
+### Graphics
+
+```{r}
+ggplot(dem_df2, aes(x = Expand, y = `Population.2014 Population`, fill = Expand)) +
+  geom_boxplot() +
+  ggtitle('2014 Population') 
+
+```
+
+```{r}
+ggplot(dem_df2, aes(x = Expand, y = `Income.Per Capita Income`, fill = Expand)) +
+  geom_boxplot() +
+  ggtitle('Income Per Capita') 
+
+
+```
+```{r}
+
+
+ggplot(dem_df2, aes(x = Expand, y = dem_df2$`Ethnicities.White Alone`, fill = Expand)) +
+  geom_boxplot() +
+  ggtitle("Ethnicities.white Alone") 
+
+
+```
