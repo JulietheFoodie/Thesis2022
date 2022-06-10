@@ -54,6 +54,7 @@ ggplot(dem_df2, aes(x = Expand, y = `Income.Per Capita Income`, fill = Expand)) 
 
 
 ```
+
 ```{r}
 
 
