@@ -1,0 +1,1148 @@
+---
+title: "MS_SC_ND_Uplaod"
+author: "Julie Norman"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r}
+library(readr)
+library(readxl)
+library(tidyverse)
+library(openxlsx)
+
+```
+
+### Mississippi
+
+#### 2011
+
+```{r}
+# read data
+ms11_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2011 County Health Ranking Mississippi Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms11_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2011 County Health Ranking Mississippi Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms11_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2011 County Health Ranking Mississippi Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms11_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2011 County Health Ranking Mississippi Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms11df_list <- list(ms11_dfA, ms11_dfB, ms11_dfC, ms11_dfD)
+
+# merge all data frames in list
+ms11D_df <- ms11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ms11D_df <- ms11D_df[-2, !duplicated(as.list(ms11D_df))]
+ 
+# merge first two rows for new column names
+colnames(ms11D_df) <- paste(sep = '.', as.character(unlist(ms11D_df[1,])), as.character(unlist(ms11D_df[2,])))
+ms11_df <- ms11D_df[-c(1,2), ]
+
+# Add Year
+ms11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+ms12_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2012 County Health Ranking Mississippi Data - v4_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms12_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2012 County Health Ranking Mississippi Data - v4_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms12_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2012 County Health Ranking Mississippi Data - v4_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms12_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2012 County Health Ranking Mississippi Data - v4_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms12df_list <- list(ms12_dfA, ms12_dfB, ms12_dfC, ms12_dfD)
+
+# merge all data frames in list
+ms12D_df <- ms12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ms12D_df <- ms12D_df[-2, !duplicated(as.list(ms12D_df))]
+ 
+# merge first two rows for new column names
+colnames(ms12D_df) <- paste(sep = '.', as.character(unlist(ms12D_df[1,])), as.character(unlist(ms12D_df[2,])))
+ms12_df <- ms12D_df[-c(1,2), ]
+
+# Add Year
+ms12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+ms13_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2013 County Health Ranking Mississippi Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms13_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2013 County Health Ranking Mississippi Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms13_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2013 County Health Ranking Mississippi Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms13_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2013 County Health Ranking Mississippi Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms13_dfE <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2013 County Health Ranking Mississippi Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms13df_list <- list(ms13_dfA, ms13_dfB, ms13_dfC, ms13_dfD, ms13_dfE)
+
+# merge all data frames in list
+ms13D_df <- ms13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ms13D_df <- ms13D_df[!duplicated(as.list(ms13D_df))]
+
+# # fill first row NA with blanms
+# ms13D_df2 <- ms13D_df[1,]
+#  ms13D_df2[is.na(ms13D_df2)] <- ""
+# ms13D_df[1,] <- ms13D_df2[1,]
+#  
+# merge first two rows for new column names
+colnames(ms13D_df) <- paste(sep = '.', as.character(unlist(ms13D_df[1,])), as.character(unlist(ms13D_df[2,])))
+ms13_df <- ms13D_df[-c(1,2), ]
+
+# Add Year
+ms13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+ms14_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2014 County Health Rankings Mississippi Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms14_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2014 County Health Rankings Mississippi Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms14_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2014 County Health Rankings Mississippi Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms14_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2014 County Health Rankings Mississippi Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms14df_list <- list(ms14_dfA, ms14_dfB, ms14_dfC, ms14_dfD)
+
+# merge all data frames in list
+ms14D_df <- ms14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+ms14D_df <- ms14D_df[-c(2, 3, 4), !duplicated(as.list(ms14D_df))]
+
+# # fill first row NA with blanms
+# ms14D_df2 <- ms14D_df[1,]
+#  ms14D_df2[is.na(ms14D_df2)] <- ""
+# ms14D_df[1,] <- ms14D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ms14D_df) <- paste(sep = '.', as.character(unlist(ms14D_df[1,])), as.character(unlist(ms14D_df[2,])))
+ms14_df <- ms14D_df[-c(1,2), ]
+#ms14_df <- ms14_df[-c(1,2), !duplicated(as.list(ms14_df))]
+
+# Add Year
+ms14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+ms15_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2015 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms15_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2015 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms15_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2015 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms15_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2015 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms15df_list <- list(ms15_dfA, ms15_dfB, ms15_dfC, ms15_dfD)
+
+# merge all data frames in list
+ms15D_df <- ms15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ms15D_df <- ms15D_df[-c(2, 3, 4), !duplicated(as.list(ms15D_df))]
+
+# # fill first row NA with blanms
+# ms15D_df2 <- ms15D_df[1,]
+#  ms15D_df2[is.na(ms15D_df2)] <- ""
+# ms15D_df[1,] <- ms15D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ms15D_df) <- paste(sep = '.', as.character(unlist(ms15D_df[1,])), as.character(unlist(ms15D_df[2,])))
+ms15_df <- ms15D_df[-c(1,2), ]
+
+# Add Year
+ms15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+ms16_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2016 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms16_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2016 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms16_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2016 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms16_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2016 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms16df_list <- list(ms16_dfA, ms16_dfB, ms16_dfC, ms16_dfD)
+
+# merge all data frames in list
+ms16D_df <- ms16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ms16D_df <- ms16D_df[-c(2, 3, 4), !duplicated(as.list(ms16D_df))]
+
+# merge first two rows for new column names
+colnames(ms16D_df) <- paste(sep = '.', as.character(unlist(ms16D_df[1,])), as.character(unlist(ms16D_df[2,])))
+ms16_df <- ms16D_df[-c(1,2), ]
+
+# Add Year
+ms16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+ms17_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2017 County Health Rankings Mississippi Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms17_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2017 County Health Rankings Mississippi Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms17_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2017 County Health Rankings Mississippi Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms17_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2017 County Health Rankings Mississippi Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms17df_list <- list(ms17_dfA, ms17_dfB, ms17_dfC, ms17_dfD)
+
+# merge all data frames in list
+ms17D_df <- ms17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ms17D_df <- ms17D_df[!duplicated(as.list(ms17D_df))]
+
+# # fill first row NA with blanms
+# ms17D_df2 <- ms17D_df[1,]
+#  ms17D_df2[is.na(ms17D_df2)] <- ""
+# ms17D_df[1,] <- ms17D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ms17D_df) <- paste(sep = '.', as.character(unlist(ms17D_df[1,])), as.character(unlist(ms17D_df[2,])))
+ms17_df <- ms17D_df[-c(1,2), ]
+
+# Add Year
+ms17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+ms18_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2018 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms18_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2018 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms18_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2018 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms18_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2018 County Health Rankings Mississippi Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms18df_list <- list(ms18_dfA, ms18_dfB, ms18_dfC, ms18_dfD)
+
+# merge all data frames in list
+ms18D_df <- ms18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ms18D_df <- ms18D_df[!duplicated(as.list(ms18D_df))]
+
+# merge first two rows for new column names
+colnames(ms18D_df) <- paste(sep = '.', as.character(unlist(ms18D_df[1,])), as.character(unlist(ms18D_df[2,])))
+ms18_df <- ms18D_df[-c(1,2), ]
+
+# Add Year
+ms18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+ms19_dfA <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2019 County Health Rankings Mississippi Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms19_dfB <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2019 County Health Rankings Mississippi Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms19_dfC <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2019 County Health Rankings Mississippi Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ms19_dfD <- read.xlsx("Data Sets/Mississippi Data Source/AnyConv.com__2019 County Health Rankings Mississippi Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ms19df_list <- list(ms19_dfA, ms19_dfB, ms19_dfC, ms19_dfD)
+
+# merge all data frames in list
+ms19D_df <- ms19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ms19D_df <- ms19D_df[ !duplicated(as.list(ms19D_df))]
+ 
+# merge first two rows for new column names
+colnames(ms19D_df) <- paste(sep = '.', as.character(unlist(ms19D_df[1,])), as.character(unlist(ms19D_df[2,])))
+ms19_df <- ms19D_df[-c(1,2), ]
+
+# Add Year
+ms19_df$Year <- 2019
+
+
+```
+
+#### Combine Mississippi
+
+```{r}
+ms_lst <- list(ms11_df, ms12_df, ms13_df, ms14_df, ms15_df, ms16_df, ms17_df, ms18_df, ms19_df)
+
+ms_df <- rbindlist(ms_lst, fill = TRUE)
+
+write_csv(ms_df, "Data Sets/Mississippi_all.csv")
+
+```
+
+### South Carolina
+
+
+#### 2011
+
+```{r}
+# read data
+sc11_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2011 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc11_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2011 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc11_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2011 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc11_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2011 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc11df_list <- list(sc11_dfA, sc11_dfB, sc11_dfC, sc11_dfD)
+
+# merge all data frames in list
+sc11D_df <- sc11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sc11D_df <- sc11D_df[-2, !duplicated(as.list(sc11D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc11D_df) <- paste(sep = '.', as.character(unlist(sc11D_df[1,])), as.character(unlist(sc11D_df[2,])))
+sc11_df <- sc11D_df[-c(1,2), ]
+
+# Add Year
+sc11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+sc12_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2012 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc12_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2012 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc12_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2012 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc12_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2012 County Health Ranking South Carolina Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc12df_list <- list(sc12_dfA, sc12_dfB, sc12_dfC, sc12_dfD)
+
+# merge all data frames in list
+sc12D_df <- sc12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sc12D_df <- sc12D_df[-2, !duplicated(as.list(sc12D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc12D_df) <- paste(sep = '.', as.character(unlist(sc12D_df[1,])), as.character(unlist(sc12D_df[2,])))
+sc12_df <- sc12D_df[-c(1,2), ]
+
+# Add Year
+sc12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+sc13_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2013 County Health Ranking South Carolina Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc13_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2013 County Health Ranking South Carolina Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc13_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2013 County Health Ranking South Carolina Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc13_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2013 County Health Ranking South Carolina Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc13_dfE <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2013 County Health Ranking South Carolina Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc13df_list <- list(sc13_dfA, sc13_dfB, sc13_dfC, sc13_dfD, sc13_dfE)
+
+# merge all data frames in list
+sc13D_df <- sc13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sc13D_df <- sc13D_df[!duplicated(as.list(sc13D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc13D_df) <- paste(sep = '.', as.character(unlist(sc13D_df[1,])), as.character(unlist(sc13D_df[2,])))
+sc13_df <- sc13D_df[-c(1,2), ]
+
+# Add Year
+sc13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+sc14_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2014 County Health Rankings South Carolina Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc14_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2014 County Health Rankings South Carolina Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc14_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2014 County Health Rankings South Carolina Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc14_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2014 County Health Rankings South Carolina Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc14df_list <- list(sc14_dfA, sc14_dfB, sc14_dfC, sc14_dfD)
+
+# merge all data frames in list
+sc14D_df <- sc14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+sc14D_df <- sc14D_df[-c(2, 3, 4), !duplicated(as.list(sc14D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc14D_df) <- paste(sep = '.', as.character(unlist(sc14D_df[1,])), as.character(unlist(sc14D_df[2,])))
+sc14_df <- sc14D_df[-c(1,2), ]
+#sc14_df <- sc14_df[-c(1,2), !duplicated(as.list(sc14_df))]
+
+# Add Year
+sc14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+sc15_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2015 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc15_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2015 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc15_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2015 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc15_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2015 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc15df_list <- list(sc15_dfA, sc15_dfB, sc15_dfC, sc15_dfD)
+
+# merge all data frames in list
+sc15D_df <- sc15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sc15D_df <- sc15D_df[-c(2, 3, 4), !duplicated(as.list(sc15D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc15D_df) <- paste(sep = '.', as.character(unlist(sc15D_df[1,])), as.character(unlist(sc15D_df[2,])))
+sc15_df <- sc15D_df[-c(1,2), ]
+
+# Add Year
+sc15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+sc16_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2016 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc16_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2016 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc16_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2016 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc16_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2016 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc16df_list <- list(sc16_dfA, sc16_dfB, sc16_dfC, sc16_dfD)
+
+# merge all data frames in list
+sc16D_df <- sc16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sc16D_df <- sc16D_df[-c(2, 3, 4), !duplicated(as.list(sc16D_df))]
+
+# merge first two rows for new column names
+colnames(sc16D_df) <- paste(sep = '.', as.character(unlist(sc16D_df[1,])), as.character(unlist(sc16D_df[2,])))
+sc16_df <- sc16D_df[-c(1,2), ]
+
+# Add Year
+sc16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+sc17_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2017 County Health Rankings South Carolina Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc17_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2017 County Health Rankings South Carolina Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc17_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2017 County Health Rankings South Carolina Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc17_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2017 County Health Rankings South Carolina Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc17df_list <- list(sc17_dfA, sc17_dfB, sc17_dfC, sc17_dfD)
+
+# merge all data frames in list
+sc17D_df <- sc17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sc17D_df <- sc17D_df[!duplicated(as.list(sc17D_df))]
+
+# merge first two rows for new column names
+colnames(sc17D_df) <- paste(sep = '.', as.character(unlist(sc17D_df[1,])), as.character(unlist(sc17D_df[2,])))
+sc17_df <- sc17D_df[-c(1,2), ]
+
+# Add Year
+sc17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+sc18_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2018 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc18_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2018 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc18_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2018 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc18_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2018 County Health Rankings South Carolina Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc18df_list <- list(sc18_dfA, sc18_dfB, sc18_dfC, sc18_dfD)
+
+# merge all data frames in list
+sc18D_df <- sc18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sc18D_df <- sc18D_df[!duplicated(as.list(sc18D_df))]
+
+# merge first two rows for new column names
+colnames(sc18D_df) <- paste(sep = '.', as.character(unlist(sc18D_df[1,])), as.character(unlist(sc18D_df[2,])))
+sc18_df <- sc18D_df[-c(1,2), ]
+
+# Add Year
+sc18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+sc19_dfA <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2019 County Health Rankings South Carolina Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc19_dfB <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2019 County Health Rankings South Carolina Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc19_dfC <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2019 County Health Rankings South Carolina Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sc19_dfD <- read.xlsx("Data Sets/South Carolina Data Source/AnyConv.com__2019 County Health Rankings South Carolina Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sc19df_list <- list(sc19_dfA, sc19_dfB, sc19_dfC, sc19_dfD)
+
+# merge all data frames in list
+sc19D_df <- sc19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sc19D_df <- sc19D_df[ !duplicated(as.list(sc19D_df))]
+ 
+# merge first two rows for new column names
+colnames(sc19D_df) <- paste(sep = '.', as.character(unlist(sc19D_df[1,])), as.character(unlist(sc19D_df[2,])))
+sc19_df <- sc19D_df[-c(1,2), ]
+
+# Add Year
+sc19_df$Year <- 2019
+
+
+```
+
+#### Combine South Carolina
+
+```{r}
+sc_lst <- list(sc11_df, sc12_df, sc13_df, sc14_df, sc15_df, sc16_df, sc17_df, sc18_df, sc19_df)
+
+sc_df <- rbindlist(sc_lst, fill = TRUE)
+
+write_csv(sc_df, "Data Sets/South Carolina_all.csv")
+
+```
+
+### South Dakota
+
+#### 2011
+
+```{r}
+# read data
+sd11_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2011 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd11_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2011 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd11_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2011 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd11_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2011 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd11df_list <- list(sd11_dfA, sd11_dfB, sd11_dfC, sd11_dfD)
+
+# merge all data frames in list
+sd11D_df <- sd11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sd11D_df <- sd11D_df[-2, !duplicated(as.list(sd11D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd11D_df) <- paste(sep = '.', as.character(unlist(sd11D_df[1,])), as.character(unlist(sd11D_df[2,])))
+sd11_df <- sd11D_df[-c(1,2), ]
+
+# Add Year
+sd11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+sd12_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2012 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd12_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2012 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd12_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2012 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd12_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2012 County Health Ranking South Dakota Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd12df_list <- list(sd12_dfA, sd12_dfB, sd12_dfC, sd12_dfD)
+
+# merge all data frames in list
+sd12D_df <- sd12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sd12D_df <- sd12D_df[-2, !duplicated(as.list(sd12D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd12D_df) <- paste(sep = '.', as.character(unlist(sd12D_df[1,])), as.character(unlist(sd12D_df[2,])))
+sd12_df <- sd12D_df[-c(1,2), ]
+
+# Add Year
+sd12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+sd13_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2013 County Health Ranking South Dakota Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd13_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2013 County Health Ranking South Dakota Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd13_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2013 County Health Ranking South Dakota Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd13_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2013 County Health Ranking South Dakota Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd13_dfE <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2013 County Health Ranking South Dakota Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd13df_list <- list(sd13_dfA, sd13_dfB, sd13_dfC, sd13_dfD, sd13_dfE)
+
+# merge all data frames in list
+sd13D_df <- sd13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sd13D_df <- sd13D_df[!duplicated(as.list(sd13D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd13D_df) <- paste(sep = '.', as.character(unlist(sd13D_df[1,])), as.character(unlist(sd13D_df[2,])))
+sd13_df <- sd13D_df[-c(1,2), ]
+
+# Add Year
+sd13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+sd14_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2014 County Health Rankings South Dakota Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd14_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2014 County Health Rankings South Dakota Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd14_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2014 County Health Rankings South Dakota Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd14_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2014 County Health Rankings South Dakota Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd14df_list <- list(sd14_dfA, sd14_dfB, sd14_dfC, sd14_dfD)
+
+# merge all data frames in list
+sd14D_df <- sd14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+sd14D_df <- sd14D_df[-c(2, 3, 4), !duplicated(as.list(sd14D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd14D_df) <- paste(sep = '.', as.character(unlist(sd14D_df[1,])), as.character(unlist(sd14D_df[2,])))
+sd14_df <- sd14D_df[-c(1,2), ]
+#sd14_df <- sd14_df[-c(1,2), !duplicated(as.list(sd14_df))]
+
+# Add Year
+sd14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+sd15_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2015 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd15_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2015 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd15_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2015 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd15_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2015 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd15df_list <- list(sd15_dfA, sd15_dfB, sd15_dfC, sd15_dfD)
+
+# merge all data frames in list
+sd15D_df <- sd15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sd15D_df <- sd15D_df[-c(2, 3, 4), !duplicated(as.list(sd15D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd15D_df) <- paste(sep = '.', as.character(unlist(sd15D_df[1,])), as.character(unlist(sd15D_df[2,])))
+sd15_df <- sd15D_df[-c(1,2), ]
+
+# Add Year
+sd15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+sd16_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2016 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd16_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2016 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd16_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2016 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd16_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2016 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd16df_list <- list(sd16_dfA, sd16_dfB, sd16_dfC, sd16_dfD)
+
+# merge all data frames in list
+sd16D_df <- sd16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sd16D_df <- sd16D_df[-c(2, 3, 4), !duplicated(as.list(sd16D_df))]
+
+# merge first two rows for new column names
+colnames(sd16D_df) <- paste(sep = '.', as.character(unlist(sd16D_df[1,])), as.character(unlist(sd16D_df[2,])))
+sd16_df <- sd16D_df[-c(1,2), ]
+
+# Add Year
+sd16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+sd17_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2017 County Health Rankings South Dakota Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd17_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2017 County Health Rankings South Dakota Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd17_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2017 County Health Rankings South Dakota Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd17_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2017 County Health Rankings South Dakota Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd17df_list <- list(sd17_dfA, sd17_dfB, sd17_dfC, sd17_dfD)
+
+# merge all data frames in list
+sd17D_df <- sd17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sd17D_df <- sd17D_df[!duplicated(as.list(sd17D_df))]
+
+# merge first two rows for new column names
+colnames(sd17D_df) <- paste(sep = '.', as.character(unlist(sd17D_df[1,])), as.character(unlist(sd17D_df[2,])))
+sd17_df <- sd17D_df[-c(1,2), ]
+
+# Add Year
+sd17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+sd18_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2018 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd18_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2018 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd18_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2018 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd18_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2018 County Health Rankings South Dakota Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd18df_list <- list(sd18_dfA, sd18_dfB, sd18_dfC, sd18_dfD)
+
+# merge all data frames in list
+sd18D_df <- sd18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+sd18D_df <- sd18D_df[!duplicated(as.list(sd18D_df))]
+
+# merge first two rows for new column names
+colnames(sd18D_df) <- paste(sep = '.', as.character(unlist(sd18D_df[1,])), as.character(unlist(sd18D_df[2,])))
+sd18_df <- sd18D_df[-c(1,2), ]
+
+# Add Year
+sd18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+sd19_dfA <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2019 County Health Rankings South Dakota Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd19_dfB <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2019 County Health Rankings South Dakota Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd19_dfC <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2019 County Health Rankings South Dakota Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+sd19_dfD <- read.xlsx("Data Sets/South Dakota Data Source/AnyConv.com__2019 County Health Rankings South Dakota Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+sd19df_list <- list(sd19_dfA, sd19_dfB, sd19_dfC, sd19_dfD)
+
+# merge all data frames in list
+sd19D_df <- sd19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+sd19D_df <- sd19D_df[ !duplicated(as.list(sd19D_df))]
+ 
+# merge first two rows for new column names
+colnames(sd19D_df) <- paste(sep = '.', as.character(unlist(sd19D_df[1,])), as.character(unlist(sd19D_df[2,])))
+sd19_df <- sd19D_df[-c(1,2), ]
+
+# Add Year
+sd19_df$Year <- 2019
+
+
+```
+
+#### Combine South Dakota
+
+```{r}
+sd_lst <- list(sd11_df, sd12_df, sd13_df, sd14_df, sd15_df, sd16_df, sd17_df, sd18_df, sd19_df)
+
+sd_df <- rbindlist(sd_lst, fill = TRUE)
+
+write_csv(sd_df, "Data Sets/South Dakota_all.csv")
+
+```

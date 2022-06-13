@@ -1147,3 +1147,392 @@ write_csv(ga_df, "Data Sets/Georgia_all.csv")
 
 ```
 
+### Kansas
+
+
+#### 2011
+
+```{r}
+# read data
+ks11_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2011 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks11_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2011 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks11_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2011 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks11_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2011 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks11df_list <- list(ks11_dfA, ks11_dfB, ks11_dfC, ks11_dfD)
+
+# merge all data frames in list
+ks11D_df <- ks11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ks11D_df <- ks11D_df[-2, !duplicated(as.list(ks11D_df))]
+ 
+# merge first two rows for new column names
+colnames(ks11D_df) <- paste(sep = '.', as.character(unlist(ks11D_df[1,])), as.character(unlist(ks11D_df[2,])))
+ks11_df <- ks11D_df[-c(1,2), ]
+
+# Add Year
+ks11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+ks12_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2012 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks12_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2012 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks12_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2012 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks12_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2012 County Health Ranking Kansas Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks12df_list <- list(ks12_dfA, ks12_dfB, ks12_dfC, ks12_dfD)
+
+# merge all data frames in list
+ks12D_df <- ks12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ks12D_df <- ks12D_df[-2, !duplicated(as.list(ks12D_df))]
+ 
+# merge first two rows for new column names
+colnames(ks12D_df) <- paste(sep = '.', as.character(unlist(ks12D_df[1,])), as.character(unlist(ks12D_df[2,])))
+ks12_df <- ks12D_df[-c(1,2), ]
+
+# Add Year
+ks12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+ks13_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2013 County Health Ranking Kansas Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks13_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2013 County Health Ranking Kansas Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks13_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2013 County Health Ranking Kansas Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks13_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2013 County Health Ranking Kansas Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks13_dfE <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2013 County Health Ranking Kansas Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks13df_list <- list(ks13_dfA, ks13_dfB, ks13_dfC, ks13_dfD, ks13_dfE)
+
+# merge all data frames in list
+ks13D_df <- ks13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ks13D_df <- ks13D_df[!duplicated(as.list(ks13D_df))]
+
+# # fill first row NA with blanks
+# ks13D_df2 <- ks13D_df[1,]
+#  ks13D_df2[is.na(ks13D_df2)] <- ""
+# ks13D_df[1,] <- ks13D_df2[1,]
+#  
+# merge first two rows for new column names
+colnames(ks13D_df) <- paste(sep = '.', as.character(unlist(ks13D_df[1,])), as.character(unlist(ks13D_df[2,])))
+ks13_df <- ks13D_df[-c(1,2), ]
+
+# Add Year
+ks13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+ks14_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2014 County Health Rankings Kansas Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks14_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2014 County Health Rankings Kansas Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks14_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2014 County Health Rankings Kansas Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks14_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2014 County Health Rankings Kansas Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks14df_list <- list(ks14_dfA, ks14_dfB, ks14_dfC, ks14_dfD)
+
+# merge all data frames in list
+ks14D_df <- ks14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+ks14D_df <- ks14D_df[-c(2, 3, 4), !duplicated(as.list(ks14D_df))]
+
+# # fill first row NA with blanks
+# ks14D_df2 <- ks14D_df[1,]
+#  ks14D_df2[is.na(ks14D_df2)] <- ""
+# ks14D_df[1,] <- ks14D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ks14D_df) <- paste(sep = '.', as.character(unlist(ks14D_df[1,])), as.character(unlist(ks14D_df[2,])))
+ks14_df <- ks14D_df[-c(1,2), ]
+#ks14_df <- ks14_df[-c(1,2), !duplicated(as.list(ks14_df))]
+
+# Add Year
+ks14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+ks15_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2015 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks15_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2015 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks15_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2015 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks15_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2015 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks15df_list <- list(ks15_dfA, ks15_dfB, ks15_dfC, ks15_dfD)
+
+# merge all data frames in list
+ks15D_df <- ks15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ks15D_df <- ks15D_df[-c(2, 3, 4), !duplicated(as.list(ks15D_df))]
+
+# # fill first row NA with blanks
+# ks15D_df2 <- ks15D_df[1,]
+#  ks15D_df2[is.na(ks15D_df2)] <- ""
+# ks15D_df[1,] <- ks15D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ks15D_df) <- paste(sep = '.', as.character(unlist(ks15D_df[1,])), as.character(unlist(ks15D_df[2,])))
+ks15_df <- ks15D_df[-c(1,2), ]
+
+# Add Year
+ks15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+ks16_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2016 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks16_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2016 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks16_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2016 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks16_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2016 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks16df_list <- list(ks16_dfA, ks16_dfB, ks16_dfC, ks16_dfD)
+
+# merge all data frames in list
+ks16D_df <- ks16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ks16D_df <- ks16D_df[-c(2, 3, 4), !duplicated(as.list(ks16D_df))]
+
+# merge first two rows for new column names
+colnames(ks16D_df) <- paste(sep = '.', as.character(unlist(ks16D_df[1,])), as.character(unlist(ks16D_df[2,])))
+ks16_df <- ks16D_df[-c(1,2), ]
+
+# Add Year
+ks16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+ks17_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2017 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks17_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2017 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks17_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2017 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks17_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2017 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks17df_list <- list(ks17_dfA, ks17_dfB, ks17_dfC, ks17_dfD)
+
+# merge all data frames in list
+ks17D_df <- ks17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ks17D_df <- ks17D_df[!duplicated(as.list(ks17D_df))]
+
+# # fill first row NA with blanks
+# ks17D_df2 <- ks17D_df[1,]
+#  ks17D_df2[is.na(ks17D_df2)] <- ""
+# ks17D_df[1,] <- ks17D_df2[1,]
+ 
+# merge first two rows for new column names
+colnames(ks17D_df) <- paste(sep = '.', as.character(unlist(ks17D_df[1,])), as.character(unlist(ks17D_df[2,])))
+ks17_df <- ks17D_df[-c(1,2), ]
+
+# Add Year
+ks17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+ks18_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2018 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks18_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2018 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks18_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2018 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks18_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2018 County Health Rankings Kansas Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks18df_list <- list(ks18_dfA, ks18_dfB, ks18_dfC, ks18_dfD)
+
+# merge all data frames in list
+ks18D_df <- ks18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+ks18D_df <- ks18D_df[!duplicated(as.list(ks18D_df))]
+
+# merge first two rows for new column names
+colnames(ks18D_df) <- paste(sep = '.', as.character(unlist(ks18D_df[1,])), as.character(unlist(ks18D_df[2,])))
+ks18_df <- ks18D_df[-c(1,2), ]
+
+# Add Year
+ks18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+ks19_dfA <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2019 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks19_dfB <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2019 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks19_dfC <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2019 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+ks19_dfD <- read.xlsx("Data Sets/Kansas Data Source/AnyConv.com__2019 County Health Rankings Kansas Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+ks19df_list <- list(ks19_dfA, ks19_dfB, ks19_dfC, ks19_dfD)
+
+# merge all data frames in list
+ks19D_df <- ks19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+ks19D_df <- ks19D_df[ !duplicated(as.list(ks19D_df))]
+ 
+# merge first two rows for new column names
+colnames(ks19D_df) <- paste(sep = '.', as.character(unlist(ks19D_df[1,])), as.character(unlist(ks19D_df[2,])))
+ks19_df <- ks19D_df[-c(1,2), ]
+
+# Add Year
+ks19_df$Year <- 2019
+
+
+```
+
+#### Combine Kansas
+
+```{r}
+ks_lst <- list(ks11_df, ks12_df, ks13_df, ks14_df, ks15_df, ks16_df, ks17_df, ks18_df, ks19_df)
+
+ks_df <- rbindlist(ks_lst, fill = TRUE)
+
+write_csv(ks_df, "Data Sets/Kansas_all.csv")
+
+```

@@ -15,13 +15,15 @@ Source: https://corgis-edu.github.io/corgis/csv/state_demographics/
 ```{r}
 dem_df <- read_csv("Data Sets/state_demographics.csv")
 
-dem_df$Expand <- ifelse(dem_df$State == "Wyoming" | dem_df$State ==  "South Dakota" | dem_df$State ==  "Wisconsin" | dem_df$State ==  "Kansas" | dem_df$State ==  "Tennessee" | dem_df$State ==  "Mississippi" | dem_df$State ==  "Alabama" | dem_df$State ==  "Georgia"  | dem_df$State ==  "North Carolina" | dem_df$State ==  "South Carolina" | dem_df$State ==  "Texas", 0, 1 )
+dem_df$Expand <- ifelse(dem_df$State ==  "Alabama" | dem_df$State == "Florida" | dem_df$State ==  "Georgia"  |  dem_df$State ==  "Kansas" | dem_df$State ==  "Mississippi"  |  dem_df$State ==  "North Carolina" |dem_df$State ==  "South Dakota"  |   dem_df$State ==  "South Carolina" |   dem_df$State ==  "Tennessee" |   dem_df$State ==  "Texas" | dem_df$State ==  "Wisconsin" | dem_df$State == "Wyoming", 0, 1 )
 
+dem_df$`Black Pop` <- dem_df$`Population.2014 Population` * (dem_df$`Ethnicities.Black Alone`/100)
+dem_df$`White Pop` <- dem_df$`Population.2014 Population` * (dem_df$`Ethnicities.White Alone`/100)
 
 dem_df2 <- dem_df %>% 
-  filter((Expand == 0 |  State == "Indiana"|   State == "Illinois"|     State == "Louisiana"|    State == "Virginia" | State == "North Dakota"   | State == "Arkansas" | State == "North Dakota" | State == "Minnesota" | State == "Nevada" | State == "Indiana" | State == "Missouri") & State != "Texas")
+  filter((Expand == 0 | State == "Arkansas" | State == "Illinois"| State == "Indiana"| State == "Louisiana"| State == "Minnesota" | State == "Missouri"  | State == "North Dakota"    |   State == "Virginia"  ) & State != "Texas")
 
-# State == "Michigan"| State == "Nebraska"| State == "West Virginia" | State == "Iowa"| | State == "Oklahoma"  | State == "Kentucky" | State == "Colorado" |  State == "Ohio"| State == "District of Columbia" | State == "Montana" | State == "Idaho" 
+# State == "Michigan"| State == "Nebraska"| State == "West Virginia" | State == "Iowa"| | State == "Oklahoma"  | State == "Kentucky" | State == "Colorado" |  State == "Ohio" | State == "Montana" | State == "Idaho" |  State == "Nevada" | State == "District of Columbia"
 
 
 demMd_df <- aggregate(dem_df2, list(dem_df2$Expand), median)
@@ -30,15 +32,37 @@ dem_df2$Expand <- as.factor(dem_df2$Expand)
 
 demMn_df <- aggregate(dem_df2, list(dem_df2$Expand), mean)
 
-demSm_df <- dem_df2[, c( 3, 4)] %>% 
+demSm_df <- dem_df2 %>% 
+  select( c(`Population.2014 Population`, `Population.2010 Population`, `Black Pop`, `White Pop`)) %>% 
   group_by(dem_df2$Expand) %>% 
-  summarise(`Population.2014 Population` = sum(`Population.2014 Population`), `Population.2010 Population` = sum(`Population.2010 Population`))
+  summarise(`Population.2014 Population` = sum(`Population.2014 Population`), `Population.2010 Population` = sum(`Population.2010 Population`), `Black Total` = sum(dem_df2$`Black Pop`), `White Total` = sum(dem_df2$`White Pop`))
 
-#View(filter(dem_df, dem_df$Expand == 1))
+# View(filter(dem_df, dem_df$Expand == 1))
+dem_df2$`Population.2014 Population`
+
+str(dem_df$`Black Pop`)
+
+dem_df2$`Black Pop`
+
+demSm1_df <- filter(dem_df, dem_df$Expand == 1)
+demSm0_df <- filter(dem_df, dem_df$Expand == 0)
+
+sum(demSm2_df$`Black Pop`)
 
 ```
 
 ### Graphics
+
+```{r}
+dem_df$Expand <- as.factor(dem_df$Expand)
+
+ggplot(dem_df, aes(x = Expand, y = `Ethnicities.Black Alone`, fill = Expand)) +
+  geom_boxplot() +
+  ggtitle('Black Population') 
+
+
+
+```
 
 ```{r}
 ggplot(dem_df2, aes(x = Expand, y = `Population.2014 Population`, fill = Expand)) +

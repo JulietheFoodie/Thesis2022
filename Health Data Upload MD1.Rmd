@@ -17,8 +17,8 @@ library(readxl)
 library(tidyverse)
 library(openxlsx)
 
-library(reshape2)
-library(data.table)
+#library(reshape2)
+#library(data.table)
 ```
 
 
@@ -28,460 +28,51 @@ library(data.table)
 
 Years 2011 - 2019
 
-##### Expanded
+##### Expanded and Using
+* Arkansas
+* Florida
+* Iowa
+* Kentucky
+* Louisiana
+* Minnesota
 * Montana
 * North Dakota
 * Nebraska
-* Minnesota
-* Iowa
-* Louisiana
-* Arkansas
-* Kentucky
 * West Virginia
 * Virginia 
 
 ##### Not Expanded
-* Wyoming
-* South Dakota
-* Wisconsin
-* Kansas
-* Tennessee
-* Mississippi
 * Alabama
-* Georgia
 * Florida
+* Georgia
+* Kansas
+
+* Mississippi
 * North Carolina
+* South Dakota
+
+* Tennessee
+* Wisconsin
+* Wyoming
+
+
+
 * South Carolina
 
 maybe * Texas
 
-##### Expanded
-* Montana
-* North Dakota
-* Nebraska
-* Minnesota
-* Iowa
-* Louisiana
-* Arkansas
-* Kentucky
-* West Virginia
-* Virginia 
 
-
+#### Data not to compare over time
+* Primary Care Physicians
+* Dentists
+* Dentists Previous Data
+* High School Graduation
+* Limited Access to Healthy Foods
 
 
 ## Health Data
 
-### Alabama
 
-
-#### 2011
-
-```{r}
-# read data
-al11_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2011 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al11_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2011 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al11_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2011 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al11_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2011 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al11df_list <- list(al11_dfA, al11_dfB, al11_dfC, al11_dfD)
-
-# merge all data frames in list
-al11D_df <- al11df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and row (unsure where row came from)
-al11D_df <- al11D_df[-2, !duplicated(as.list(al11D_df))]
-
-# # fill first row NA with blanks
-# al11D_df2 <- al11D_df[1,]
-#  al11D_df2[is.na(al11D_df2)] <- ""
-# al11D_df[1,] <- al11D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al11D_df) <- paste(sep = '.', as.character(unlist(al11D_df[1,])), as.character(unlist(al11D_df[2,])))
-al11_df <- al11D_df[-c(1,2), ]
-
-# Add Year
-al11_df$Year <- 2011
-
-
-```
-
-#### 2012
-
-```{r}
-# read data
-al12_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2012 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al12_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2012 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al12_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2012 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al12_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2012 County Health Ranking Alabama Data - v4.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al12df_list <- list(al12_dfA, al12_dfB, al12_dfC, al12_dfD)
-
-# merge all data frames in list
-al12D_df <- al12df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and row (unsure where row came from)
-al12D_df <- al12D_df[-2, !duplicated(as.list(al12D_df))]
-# 
-# # fill first row NA with blanks
-# al12D_df2 <- al12D_df[1,]
-#  al12D_df2[is.na(al12D_df2)] <- ""
-# al12D_df[1,] <- al12D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al12D_df) <- paste(sep = '.', as.character(unlist(al12D_df[1,])), as.character(unlist(al12D_df[2,])))
-al12_df <- al12D_df[-c(1,2), ]
-
-# Add Year
-al12_df$Year <- 2012
-
-
-```
-
-#### 2013 
-
-```{r}
-# read data
-al13_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2013 County Health Ranking Alabama Data - v1_1.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al13_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2013 County Health Ranking Alabama Data - v1_1.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al13_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2013 County Health Ranking Alabama Data - v1_1.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al13_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2013 County Health Ranking Alabama Data - v1_1.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al13_dfE <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2013 County Health Ranking Alabama Data - v1_1.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al13df_list <- list(al13_dfA, al13_dfB, al13_dfC, al13_dfD, al13_dfE)
-
-# merge all data frames in list
-al13D_df <- al13df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns 
-al13D_df <- al13D_df[!duplicated(as.list(al13D_df))]
-
-# fill first row NA with blanks
-al13D_df2 <- al13D_df[1,]
- al13D_df2[is.na(al13D_df2)] <- ""
-al13D_df[1,] <- al13D_df2[1,]
- 
-# # merge first two rows for new column names
-# colnames(al13D_df) <- paste(sep = '.', as.character(unlist(al13D_df[1,])), as.character(unlist(al13D_df[2,])))
-# al13_df <- al13D_df[-c(1,2), ]
-
-# Add Year
-al13_df$Year <- 2013
-
-
-```
-
-#### 2014
-
-```{r}
-# read data
-al14_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2014 County Health Rankings Alabama Data - v6.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al14_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2014 County Health Rankings Alabama Data - v6.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al14_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2014 County Health Rankings Alabama Data - v6.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al14_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2014 County Health Rankings Alabama Data - v6.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al14df_list <- list(al14_dfA, al14_dfB, al14_dfC, al14_dfD)
-
-# merge all data frames in list
-al14D_df <- al14df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and rows (unsure where rows came from)
-al14D_df <- al14D_df[-c(2,3,4), !duplicated(as.list(al14D_df))]
-
-# # fill first row NA with blanks
-# al14D_df2 <- al14D_df[1,]
-#  al14D_df2[is.na(al14D_df2)] <- ""
-# al14D_df[1,] <- al14D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al14D_df) <- paste(sep = '.', as.character(unlist(al14D_df[1,])), as.character(unlist(al14D_df[2,])))
-al14_df <- al14D_df[-c(1,2), ]
-
-# Add Year
-al14_df$Year <- 2014
-
-
-```
-
-#### 2015 
-
-```{r}
-# read data
-al15_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2015 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al15_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2015 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al15_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2015 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al15_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2015 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al15df_list <- list(al15_dfA, al15_dfB, al15_dfC, al15_dfD)
-
-# merge all data frames in list
-al15D_df <- al15df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and row (unsure where row came from)
-al15D_df <- al15D_df[-c(2, 3, 4), !duplicated(as.list(al15D_df))]
-
-# fill first row NA with blanks
-al15D_df2 <- al15D_df[1,]
- al15D_df2[is.na(al15D_df2)] <- ""
-al15D_df[1,] <- al15D_df2[1,]
- 
-# # merge first two rows for new column names
-# colnames(al15D_df) <- paste(sep = '.', as.character(unlist(al15D_df[1,])), as.character(unlist(al15D_df[2,])))
-# al15_df <- al15D_df[-c(1,2), ]
-
-# Add Year
-al15_df$Year <- 2015
-
-
-```
-
-#### 2016 
-
-```{r}
-# read data
-al16_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2016 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al16_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2016 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al16_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2016 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al16_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2016 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al16df_list <- list(al16_dfA, al16_dfB, al16_dfC, al16_dfD)
-
-# merge all data frames in list
-al16D_df <- al16df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and row (unsure where row came from)
-al16D_df <- al16D_df[-c(2, 3, 4), !duplicated(as.list(al16D_df))]
-
-# # fill first row NA with blanks
-# al16D_df2 <- al16D_df[1,]
-#  al16D_df2[is.na(al16D_df2)] <- ""
-# al16D_df[1,] <- al16D_df2[1,]
-#  
-# merge first two rows for new column names
-colnames(al16D_df) <- paste(sep = '.', as.character(unlist(al16D_df[1,])), as.character(unlist(al16D_df[2,])))
-al16_df <- al16D_df[-c(1,2), ]
-
-# Add Year
-al16_df$Year <- 2016
-
-
-```
-
-#### 2017
-
-```{r}
-# read data
-al17_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2017 County Health Rankings Alabama Data - v2.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al17_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2017 County Health Rankings Alabama Data - v2.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al17_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2017 County Health Rankings Alabama Data - v2.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al17_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2017 County Health Rankings Alabama Data - v2.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al17df_list <- list(al17_dfA, al17_dfB, al17_dfC, al17_dfD)
-
-# merge all data frames in list
-al17D_df <- al17df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns 
-al17D_df <- al17D_df[!duplicated(as.list(al17D_df))]
-
-# # fill first row NA with blanks
-# al17D_df2 <- al17D_df[1,]
-#  al17D_df2[is.na(al17D_df2)] <- ""
-# al17D_df[1,] <- al17D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al17D_df) <- paste(sep = '.', as.character(unlist(al17D_df[1,])), as.character(unlist(al17D_df[2,])))
-al17_df <- al17D_df[-c(1,2), ]
-
-# Add Year
-al17_df$Year <- 2017
-
-
-```
-
-#### 2018 
-
-```{r}
-# read data
-al18_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2018 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al18_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2018 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al18_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2018 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al18_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2018 County Health Rankings Alabama Data - v3.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al18df_list <- list(al18_dfA, al18_dfB, al18_dfC, al18_dfD)
-
-# merge all data frames in list
-al18D_df <- al18df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns 
-al18D_df <- al18D_df[!duplicated(as.list(al18D_df))]
-
-# # fill first row NA with blanks
-# al18D_df2 <- al18D_df[1,]
-#  al18D_df2[is.na(al18D_df2)] <- ""
-# al18D_df[1,] <- al18D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al18D_df) <- paste(sep = '.', as.character(unlist(al18D_df[1,])), as.character(unlist(al18D_df[2,])))
-al18_df <- al18D_df[-c(1,2), ]
-
-# Add Year
-al18_df$Year <- 2018
-
-
-```
-
-#### 2019 
-
-```{r}
-# read data
-al19_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2019 County Health Rankings Alabama Data - v1_0.xlsx", 
-    sheet = 2,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al19_dfB <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2019 County Health Rankings Alabama Data - v1_0.xlsx", 
-    sheet = 3,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al19_dfC <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2019 County Health Rankings Alabama Data - v1_0.xlsx", 
-    sheet = 4,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-al19_dfD <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2019 County Health Rankings Alabama Data - v1_0.xlsx", 
-    sheet = 5,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-# put all data frames into list
-al19df_list <- list(al19_dfA, al19_dfB, al19_dfC, al19_dfD)
-
-# merge all data frames in list
-al19D_df <- al19df_list %>% reduce(full_join, by = 'X1')
-
-# Delete Duplicate Columns and row (unsure where row came from)
-al19D_df <- al19D_df[ !duplicated(as.list(al19D_df))]
-
-# # fill first row NA with blanks
-# al19D_df2 <- al19D_df[1,]
-#  al19D_df2[is.na(al19D_df2)] <- ""
-# al19D_df[1,] <- al19D_df2[1,]
- 
-# merge first two rows for new column names
-colnames(al19D_df) <- paste(sep = '.', as.character(unlist(al19D_df[1,])), as.character(unlist(al19D_df[2,])))
-al19_df <- al19D_df[-c(1,2), ]
-
-# Add Year
-al19_df$Year <- 2019
-
-
-```
-
-#### Combine Alabama
-
-```{r}
-al_lst <- list(al11_df, al12_df, al13_df, al14_df, al15_df, al16_df, al17_df, al18_df, al19_df)
-
-al_df <- rbindlist(al_lst, fill = TRUE)
-```
 
 
 
@@ -515,6 +106,13 @@ colnames(d) <- name_cols
 header <- factor(rep(header, each = nrow(d) * (length(unique(colnames(d)))-1)),
                  levels = header)
 header
+```
+
+```{r}
+# # fill first row NA with blanks
+# ga19D_df2 <- ga19D_df[1,]
+#  ga19D_df2[is.na(ga19D_df2)] <- ""
+# ga19D_df[1,] <- ga19D_df2[1,]
 ```
 
 
