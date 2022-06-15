@@ -1,0 +1,1130 @@
+---
+title: "TN_WI_WY_Upload"
+author: "Julie Norman"
+date: '2022-06-15'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r}
+library(readr)
+library(readxl)
+library(tidyverse)
+library(openxlsx)
+
+```
+
+### Tennessee
+
+#### 2011
+
+```{r}
+# read data
+tn11_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2011 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn11_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2011 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn11_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2011 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn11_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2011 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn11df_list <- list(tn11_dfA, tn11_dfB, tn11_dfC, tn11_dfD)
+
+# merge all data frames in list
+tn11D_df <- tn11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+tn11D_df <- tn11D_df[-2, !duplicated(as.list(tn11D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn11D_df) <- paste(sep = '.', as.character(unlist(tn11D_df[1,])), as.character(unlist(tn11D_df[2,])))
+tn11_df <- tn11D_df[-c(1,2), ]
+
+# Add Year
+tn11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+tn12_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2012 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn12_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2012 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn12_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2012 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn12_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2012 County Health Ranking Tennessee Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn12df_list <- list(tn12_dfA, tn12_dfB, tn12_dfC, tn12_dfD)
+
+# merge all data frames in list
+tn12D_df <- tn12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+tn12D_df <- tn12D_df[-2, !duplicated(as.list(tn12D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn12D_df) <- paste(sep = '.', as.character(unlist(tn12D_df[1,])), as.character(unlist(tn12D_df[2,])))
+tn12_df <- tn12D_df[-c(1,2), ]
+
+# Add Year
+tn12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+tn13_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2013 County Health Ranking Tennessee Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn13_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2013 County Health Ranking Tennessee Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn13_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2013 County Health Ranking Tennessee Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn13_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2013 County Health Ranking Tennessee Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn13_dfE <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2013 County Health Ranking Tennessee Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn13df_list <- list(tn13_dfA, tn13_dfB, tn13_dfC, tn13_dfD, tn13_dfE)
+
+# merge all data frames in list
+tn13D_df <- tn13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+tn13D_df <- tn13D_df[!duplicated(as.list(tn13D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn13D_df) <- paste(sep = '.', as.character(unlist(tn13D_df[1,])), as.character(unlist(tn13D_df[2,])))
+tn13_df <- tn13D_df[-c(1,2), ]
+
+# Add Year
+tn13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+tn14_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2014 County Health Rankings Tennessee Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn14_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2014 County Health Rankings Tennessee Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn14_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2014 County Health Rankings Tennessee Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn14_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2014 County Health Rankings Tennessee Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn14df_list <- list(tn14_dfA, tn14_dfB, tn14_dfC, tn14_dfD)
+
+# merge all data frames in list
+tn14D_df <- tn14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+tn14D_df <- tn14D_df[-c(2, 3, 4), !duplicated(as.list(tn14D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn14D_df) <- paste(sep = '.', as.character(unlist(tn14D_df[1,])), as.character(unlist(tn14D_df[2,])))
+tn14_df <- tn14D_df[-c(1,2), ]
+#tn14_df <- tn14_df[-c(1,2), !duplicated(as.list(tn14_df))]
+
+# Add Year
+tn14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+tn15_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2015 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn15_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2015 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn15_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2015 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn15_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2015 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn15df_list <- list(tn15_dfA, tn15_dfB, tn15_dfC, tn15_dfD)
+
+# merge all data frames in list
+tn15D_df <- tn15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+tn15D_df <- tn15D_df[-c(2, 3, 4), !duplicated(as.list(tn15D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn15D_df) <- paste(sep = '.', as.character(unlist(tn15D_df[1,])), as.character(unlist(tn15D_df[2,])))
+tn15_df <- tn15D_df[-c(1,2), ]
+
+# Add Year
+tn15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+tn16_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2016 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn16_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2016 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn16_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2016 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn16_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2016 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn16df_list <- list(tn16_dfA, tn16_dfB, tn16_dfC, tn16_dfD)
+
+# merge all data frames in list
+tn16D_df <- tn16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+tn16D_df <- tn16D_df[-c(2, 3, 4), !duplicated(as.list(tn16D_df))]
+
+# merge first two rows for new column names
+colnames(tn16D_df) <- paste(sep = '.', as.character(unlist(tn16D_df[1,])), as.character(unlist(tn16D_df[2,])))
+tn16_df <- tn16D_df[-c(1,2), ]
+
+# Add Year
+tn16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+tn17_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2017 County Health Rankings Tennessee Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn17_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2017 County Health Rankings Tennessee Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn17_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2017 County Health Rankings Tennessee Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn17_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2017 County Health Rankings Tennessee Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn17df_list <- list(tn17_dfA, tn17_dfB, tn17_dfC, tn17_dfD)
+
+# merge all data frames in list
+tn17D_df <- tn17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+tn17D_df <- tn17D_df[!duplicated(as.list(tn17D_df))]
+
+# merge first two rows for new column names
+colnames(tn17D_df) <- paste(sep = '.', as.character(unlist(tn17D_df[1,])), as.character(unlist(tn17D_df[2,])))
+tn17_df <- tn17D_df[-c(1,2), ]
+
+# Add Year
+tn17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+tn18_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2018 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn18_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2018 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn18_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2018 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn18_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2018 County Health Rankings Tennessee Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn18df_list <- list(tn18_dfA, tn18_dfB, tn18_dfC, tn18_dfD)
+
+# merge all data frames in list
+tn18D_df <- tn18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+tn18D_df <- tn18D_df[!duplicated(as.list(tn18D_df))]
+
+# merge first two rows for new column names
+colnames(tn18D_df) <- paste(sep = '.', as.character(unlist(tn18D_df[1,])), as.character(unlist(tn18D_df[2,])))
+tn18_df <- tn18D_df[-c(1,2), ]
+
+# Add Year
+tn18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+tn19_dfA <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2019 County Health Rankings Tennessee Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn19_dfB <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2019 County Health Rankings Tennessee Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn19_dfC <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2019 County Health Rankings Tennessee Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+tn19_dfD <- read.xlsx("Data Sets/Tennessee Data Source/AnyConv.com__2019 County Health Rankings Tennessee Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+tn19df_list <- list(tn19_dfA, tn19_dfB, tn19_dfC, tn19_dfD)
+
+# merge all data frames in list
+tn19D_df <- tn19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+tn19D_df <- tn19D_df[ !duplicated(as.list(tn19D_df))]
+ 
+# merge first two rows for new column names
+colnames(tn19D_df) <- paste(sep = '.', as.character(unlist(tn19D_df[1,])), as.character(unlist(tn19D_df[2,])))
+tn19_df <- tn19D_df[-c(1,2), ]
+
+# Add Year
+tn19_df$Year <- 2019
+
+
+```
+
+#### Combine Tennessee
+
+```{r}
+tn_lst <- list(tn11_df, tn12_df, tn13_df, tn14_df, tn15_df, tn16_df, tn17_df, tn18_df, tn19_df)
+
+tn_df <- rbindlist(tn_lst, fill = TRUE)
+
+write_csv(tn_df, "Data Sets/Tennessee_all.csv")
+
+```
+
+### Wisconsin
+
+#### 2011
+
+```{r}
+# read data
+wi11_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2011 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi11_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2011 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi11_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2011 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi11_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2011 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi11df_list <- list(wi11_dfA, wi11_dfB, wi11_dfC, wi11_dfD)
+
+# merge all data frames in list
+wi11D_df <- wi11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wi11D_df <- wi11D_df[-2, !duplicated(as.list(wi11D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi11D_df) <- paste(sep = '.', as.character(unlist(wi11D_df[1,])), as.character(unlist(wi11D_df[2,])))
+wi11_df <- wi11D_df[-c(1,2), ]
+
+# Add Year
+wi11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+wi12_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2012 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi12_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2012 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi12_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2012 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi12_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2012 County Health Ranking Wisconsin Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi12df_list <- list(wi12_dfA, wi12_dfB, wi12_dfC, wi12_dfD)
+
+# merge all data frames in list
+wi12D_df <- wi12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wi12D_df <- wi12D_df[-2, !duplicated(as.list(wi12D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi12D_df) <- paste(sep = '.', as.character(unlist(wi12D_df[1,])), as.character(unlist(wi12D_df[2,])))
+wi12_df <- wi12D_df[-c(1,2), ]
+
+# Add Year
+wi12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+wi13_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2013 County Health Ranking Wisconsin Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi13_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2013 County Health Ranking Wisconsin Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi13_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2013 County Health Ranking Wisconsin Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi13_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2013 County Health Ranking Wisconsin Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi13_dfE <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2013 County Health Ranking Wisconsin Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi13df_list <- list(wi13_dfA, wi13_dfB, wi13_dfC, wi13_dfD, wi13_dfE)
+
+# merge all data frames in list
+wi13D_df <- wi13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wi13D_df <- wi13D_df[!duplicated(as.list(wi13D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi13D_df) <- paste(sep = '.', as.character(unlist(wi13D_df[1,])), as.character(unlist(wi13D_df[2,])))
+wi13_df <- wi13D_df[-c(1,2), ]
+
+# Add Year
+wi13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+wi14_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2014 County Health Rankings Wisconsin Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi14_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2014 County Health Rankings Wisconsin Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi14_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2014 County Health Rankings Wisconsin Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi14_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2014 County Health Rankings Wisconsin Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi14df_list <- list(wi14_dfA, wi14_dfB, wi14_dfC, wi14_dfD)
+
+# merge all data frames in list
+wi14D_df <- wi14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+wi14D_df <- wi14D_df[-c(2, 3, 4), !duplicated(as.list(wi14D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi14D_df) <- paste(sep = '.', as.character(unlist(wi14D_df[1,])), as.character(unlist(wi14D_df[2,])))
+wi14_df <- wi14D_df[-c(1,2), ]
+#wi14_df <- wi14_df[-c(1,2), !duplicated(as.list(wi14_df))]
+
+# Add Year
+wi14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+wi15_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2015 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi15_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2015 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi15_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2015 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi15_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2015 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi15df_list <- list(wi15_dfA, wi15_dfB, wi15_dfC, wi15_dfD)
+
+# merge all data frames in list
+wi15D_df <- wi15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wi15D_df <- wi15D_df[-c(2, 3, 4), !duplicated(as.list(wi15D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi15D_df) <- paste(sep = '.', as.character(unlist(wi15D_df[1,])), as.character(unlist(wi15D_df[2,])))
+wi15_df <- wi15D_df[-c(1,2), ]
+
+# Add Year
+wi15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+wi16_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2016 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi16_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2016 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi16_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2016 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi16_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2016 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi16df_list <- list(wi16_dfA, wi16_dfB, wi16_dfC, wi16_dfD)
+
+# merge all data frames in list
+wi16D_df <- wi16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wi16D_df <- wi16D_df[-c(2, 3, 4), !duplicated(as.list(wi16D_df))]
+
+# merge first two rows for new column names
+colnames(wi16D_df) <- paste(sep = '.', as.character(unlist(wi16D_df[1,])), as.character(unlist(wi16D_df[2,])))
+wi16_df <- wi16D_df[-c(1,2), ]
+
+# Add Year
+wi16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+wi17_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2017 County Health Rankings Wisconsin Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi17_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2017 County Health Rankings Wisconsin Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi17_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2017 County Health Rankings Wisconsin Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi17_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2017 County Health Rankings Wisconsin Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi17df_list <- list(wi17_dfA, wi17_dfB, wi17_dfC, wi17_dfD)
+
+# merge all data frames in list
+wi17D_df <- wi17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wi17D_df <- wi17D_df[!duplicated(as.list(wi17D_df))]
+
+# merge first two rows for new column names
+colnames(wi17D_df) <- paste(sep = '.', as.character(unlist(wi17D_df[1,])), as.character(unlist(wi17D_df[2,])))
+wi17_df <- wi17D_df[-c(1,2), ]
+
+# Add Year
+wi17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+wi18_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2018 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi18_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2018 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi18_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2018 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi18_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2018 County Health Rankings Wisconsin Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi18df_list <- list(wi18_dfA, wi18_dfB, wi18_dfC, wi18_dfD)
+
+# merge all data frames in list
+wi18D_df <- wi18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wi18D_df <- wi18D_df[!duplicated(as.list(wi18D_df))]
+
+# merge first two rows for new column names
+colnames(wi18D_df) <- paste(sep = '.', as.character(unlist(wi18D_df[1,])), as.character(unlist(wi18D_df[2,])))
+wi18_df <- wi18D_df[-c(1,2), ]
+
+# Add Year
+wi18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+wi19_dfA <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2019 County Health Rankings Wisconsin Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi19_dfB <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2019 County Health Rankings Wisconsin Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi19_dfC <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2019 County Health Rankings Wisconsin Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wi19_dfD <- read.xlsx("Data Sets/Wisconsin Data Source/AnyConv.com__2019 County Health Rankings Wisconsin Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wi19df_list <- list(wi19_dfA, wi19_dfB, wi19_dfC, wi19_dfD)
+
+# merge all data frames in list
+wi19D_df <- wi19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wi19D_df <- wi19D_df[ !duplicated(as.list(wi19D_df))]
+ 
+# merge first two rows for new column names
+colnames(wi19D_df) <- paste(sep = '.', as.character(unlist(wi19D_df[1,])), as.character(unlist(wi19D_df[2,])))
+wi19_df <- wi19D_df[-c(1,2), ]
+
+# Add Year
+wi19_df$Year <- 2019
+
+
+```
+
+#### Combine Wisconsin
+
+```{r}
+wi_lst <- list(wi11_df, wi12_df, wi13_df, wi14_df, wi15_df, wi16_df, wi17_df, wi18_df, wi19_df)
+
+wi_df <- rbindlist(wi_lst, fill = TRUE)
+
+write_csv(wi_df, "Data Sets/Wisconsin_all.csv")
+
+```
+
+### Wyoming
+
+#### 2011
+
+```{r}
+# read data
+wy11_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2011 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy11_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2011 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy11_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2011 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy11_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2011 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy11df_list <- list(wy11_dfA, wy11_dfB, wy11_dfC, wy11_dfD)
+
+# merge all data frames in list
+wy11D_df <- wy11df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wy11D_df <- wy11D_df[-2, !duplicated(as.list(wy11D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy11D_df) <- paste(sep = '.', as.character(unlist(wy11D_df[1,])), as.character(unlist(wy11D_df[2,])))
+wy11_df <- wy11D_df[-c(1,2), ]
+
+# Add Year
+wy11_df$Year <- 2011
+
+
+```
+
+#### 2012
+
+```{r}
+# read data
+wy12_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2012 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy12_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2012 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy12_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2012 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy12_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2012 County Health Ranking Wyoming Data - v4.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy12df_list <- list(wy12_dfA, wy12_dfB, wy12_dfC, wy12_dfD)
+
+# merge all data frames in list
+wy12D_df <- wy12df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wy12D_df <- wy12D_df[-2, !duplicated(as.list(wy12D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy12D_df) <- paste(sep = '.', as.character(unlist(wy12D_df[1,])), as.character(unlist(wy12D_df[2,])))
+wy12_df <- wy12D_df[-c(1,2), ]
+
+# Add Year
+wy12_df$Year <- 2012
+
+
+```
+
+#### 2013 
+
+```{r}
+# read data
+wy13_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2013 County Health Ranking Wyoming Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy13_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2013 County Health Ranking Wyoming Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy13_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2013 County Health Ranking Wyoming Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy13_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2013 County Health Ranking Wyoming Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy13_dfE <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2013 County Health Ranking Wyoming Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy13df_list <- list(wy13_dfA, wy13_dfB, wy13_dfC, wy13_dfD, wy13_dfE)
+
+# merge all data frames in list
+wy13D_df <- wy13df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wy13D_df <- wy13D_df[!duplicated(as.list(wy13D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy13D_df) <- paste(sep = '.', as.character(unlist(wy13D_df[1,])), as.character(unlist(wy13D_df[2,])))
+wy13_df <- wy13D_df[-c(1,2), ]
+
+# Add Year
+wy13_df$Year <- 2013
+
+
+```
+
+#### 2014
+
+```{r}
+# read data
+wy14_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2014 County Health Rankings Wyoming Data - v6.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy14_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2014 County Health Rankings Wyoming Data - v6.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy14_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2014 County Health Rankings Wyoming Data - v6.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy14_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2014 County Health Rankings Wyoming Data - v6.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy14df_list <- list(wy14_dfA, wy14_dfB, wy14_dfC, wy14_dfD)
+
+# merge all data frames in list
+wy14D_df <- wy14df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and rows (unsure where rows came from)
+wy14D_df <- wy14D_df[-c(2, 3, 4), !duplicated(as.list(wy14D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy14D_df) <- paste(sep = '.', as.character(unlist(wy14D_df[1,])), as.character(unlist(wy14D_df[2,])))
+wy14_df <- wy14D_df[-c(1,2), ]
+#wy14_df <- wy14_df[-c(1,2), !duplicated(as.list(wy14_df))]
+
+# Add Year
+wy14_df$Year <- 2014
+
+
+```
+
+#### 2015 
+
+```{r}
+# read data
+wy15_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2015 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy15_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2015 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy15_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2015 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy15_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2015 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy15df_list <- list(wy15_dfA, wy15_dfB, wy15_dfC, wy15_dfD)
+
+# merge all data frames in list
+wy15D_df <- wy15df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wy15D_df <- wy15D_df[-c(2, 3, 4), !duplicated(as.list(wy15D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy15D_df) <- paste(sep = '.', as.character(unlist(wy15D_df[1,])), as.character(unlist(wy15D_df[2,])))
+wy15_df <- wy15D_df[-c(1,2), ]
+
+# Add Year
+wy15_df$Year <- 2015
+
+
+```
+
+#### 2016 
+
+```{r}
+# read data
+wy16_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2016 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy16_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2016 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy16_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2016 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy16_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2016 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy16df_list <- list(wy16_dfA, wy16_dfB, wy16_dfC, wy16_dfD)
+
+# merge all data frames in list
+wy16D_df <- wy16df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wy16D_df <- wy16D_df[-c(2, 3, 4), !duplicated(as.list(wy16D_df))]
+
+# merge first two rows for new column names
+colnames(wy16D_df) <- paste(sep = '.', as.character(unlist(wy16D_df[1,])), as.character(unlist(wy16D_df[2,])))
+wy16_df <- wy16D_df[-c(1,2), ]
+
+# Add Year
+wy16_df$Year <- 2016
+
+
+```
+
+#### 2017
+
+```{r}
+# read data
+wy17_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2017 County Health Rankings Wyoming Data - v2.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy17_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2017 County Health Rankings Wyoming Data - v2.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy17_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2017 County Health Rankings Wyoming Data - v2.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy17_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2017 County Health Rankings Wyoming Data - v2.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy17df_list <- list(wy17_dfA, wy17_dfB, wy17_dfC, wy17_dfD)
+
+# merge all data frames in list
+wy17D_df <- wy17df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wy17D_df <- wy17D_df[!duplicated(as.list(wy17D_df))]
+
+# merge first two rows for new column names
+colnames(wy17D_df) <- paste(sep = '.', as.character(unlist(wy17D_df[1,])), as.character(unlist(wy17D_df[2,])))
+wy17_df <- wy17D_df[-c(1,2), ]
+
+# Add Year
+wy17_df$Year <- 2017
+
+
+```
+
+#### 2018 
+
+```{r}
+# read data
+wy18_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2018 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy18_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2018 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy18_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2018 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy18_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2018 County Health Rankings Wyoming Data - v3.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy18df_list <- list(wy18_dfA, wy18_dfB, wy18_dfC, wy18_dfD)
+
+# merge all data frames in list
+wy18D_df <- wy18df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns 
+wy18D_df <- wy18D_df[!duplicated(as.list(wy18D_df))]
+
+# merge first two rows for new column names
+colnames(wy18D_df) <- paste(sep = '.', as.character(unlist(wy18D_df[1,])), as.character(unlist(wy18D_df[2,])))
+wy18_df <- wy18D_df[-c(1,2), ]
+
+# Add Year
+wy18_df$Year <- 2018
+
+
+```
+
+#### 2019 
+
+```{r}
+# read data
+wy19_dfA <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2019 County Health Rankings Wyoming Data - v1_0.xlsx", 
+    sheet = 2,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy19_dfB <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2019 County Health Rankings Wyoming Data - v1_0.xlsx", 
+    sheet = 3,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy19_dfC <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2019 County Health Rankings Wyoming Data - v1_0.xlsx", 
+    sheet = 4,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+wy19_dfD <- read.xlsx("Data Sets/Wyoming Data Source/AnyConv.com__2019 County Health Rankings Wyoming Data - v1_0.xlsx", 
+    sheet = 5,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+# put all data frames into list
+wy19df_list <- list(wy19_dfA, wy19_dfB, wy19_dfC, wy19_dfD)
+
+# merge all data frames in list
+wy19D_df <- wy19df_list %>% reduce(full_join, by = 'X1')
+
+# Delete Duplicate Columns and row (unsure where row came from)
+wy19D_df <- wy19D_df[ !duplicated(as.list(wy19D_df))]
+ 
+# merge first two rows for new column names
+colnames(wy19D_df) <- paste(sep = '.', as.character(unlist(wy19D_df[1,])), as.character(unlist(wy19D_df[2,])))
+wy19_df <- wy19D_df[-c(1,2), ]
+
+# Add Year
+wy19_df$Year <- 2019
+
+
+```
+
+#### Combine Wyoming
+
+```{r}
+wy_lst <- list(wy11_df, wy12_df, wy13_df, wy14_df, wy15_df, wy16_df, wy17_df, wy18_df, wy19_df)
+
+wy_df <- rbindlist(wy_lst, fill = TRUE)
+
+wy_df2  <- select(sort(current_vars()))
+
+write_csv(wy_df, "Data Sets/Wyoming_all.csv")
+
+```
+

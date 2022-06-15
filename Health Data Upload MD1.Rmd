@@ -22,8 +22,6 @@ library(openxlsx)
 ```
 
 
-
-
 #### States of Interest
 
 Years 2011 - 2019
@@ -48,8 +46,9 @@ Years 2011 - 2019
 * Kansas
 
 * Mississippi
-* North Carolina
+* North Carolina Need
 * South Dakota
+* South Carolina 
 
 * Tennessee
 * Wisconsin
@@ -57,9 +56,11 @@ Years 2011 - 2019
 
 
 
-* South Carolina
+
 
 maybe * Texas
+maybe remove: tennessee, south dakota, Georgia, Kansas  
+
 
 
 #### Data not to compare over time
@@ -70,7 +71,21 @@ maybe * Texas
 * Limited Access to Healthy Foods
 
 
-## Health Data
+## Not Expanded States Data 
+
+```{r}
+# read csv
+al_df <- read_csv("Data Sets/Alabama_all.csv")
+fl_df <- read_csv("Data Sets/Florida_all.csv")
+ks_df <- read_csv("Data Sets/Kansas_all.csv")
+ms_df <- read_csv("Data Sets/Mississippi_all.csv")
+sc_df <- read_csv("Data Sets/South Carolina_all.csv")
+tn_df <- read_csv("Data Sets/Tennessee_all.csv")
+wi_df <- read_csv("Data Sets/Wisconsin_all.csv")
+wy_df <- read_csv("Data Sets/Wyoming_all.csv")
+
+```
+
 
 
 
@@ -155,5 +170,11 @@ al11_dfA <- read.xlsx("Data Sets/Alabama Data/AnyConv.com__2011 County Health Ra
     fillMergedCells = TRUE, colNames = FALSE) %>%
   rename_with(.fn = \(cn) sapply(.[1.2,], \(c) paste(na.omit(c), collapse = "_"))) %>%
   slice(3:n())
+```
+
+```{r}
+# count na 
+na_count <-sapply(wy_df2, function(y) sum(is.na(y)))
+na_count
 ```
 
