@@ -1,0 +1,340 @@
+---
+title: "Loop Data Upload"
+author: "Julie Norman"
+date: '2022-06-20'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r}
+library("tidyverse")
+```
+
+## States
+
+### Alabama
+
+```{r}
+
+al_files <- list.files("Data Sets/Alabama Data Source/Alabama xlsx/")
+
+for(i in 1:length(al_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("al1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Alabama Data Source/Alabama xlsx/",
+                   al_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Florida 
+
+```{r}
+
+fl_files <- list.files("Data Sets/Florida Data Source/Florida xlsx/")
+
+for(i in 1:length(fl_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("fl1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Florida Data Source/Florida xlsx/",
+                   fl_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+
+```
+
+### Georgia
+
+```{r}
+
+ga_files <- list.files("Data Sets/Georgia Data Source/Georgia xlsx/")
+
+for(i in 1:length(ga_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ga1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Georgia Data Source/Georgia xlsx/",
+                   ga_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Kansas
+
+```{r}
+
+ks_files <- list.files("Data Sets/Kansas Data Source/Kansas xlsx/")
+
+for(i in 1:length(ks_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ks1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Kansas Data Source/Kansas xlsx/",
+                   ks_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Mississippi
+
+```{r}
+
+ms_files <- list.files("Data Sets/Mississippi Data Source/Mississippi xlsx/")
+
+for(i in 1:length(ms_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ms1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Mississippi Data Source/Mississippi xlsx/",
+                   ms_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### North Carolina
+
+```{r}
+# Data upload 
+
+nc_files <- list.files("Data Sets/North Carolina Data Source/North Carolina xlsx/")
+
+for(i in 1:length(nc_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("nc1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/North Carolina Data Source/North Carolina xlsx/",
+                   nc_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### South Carolina
+
+```{r}
+# Data upload 
+
+sc_files <- list.files("Data Sets/South Carolina Data Source/South Carolina xlsx/")
+
+for(i in 1:length(sc_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("sc1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/South Carolina Data Source/South Carolina xlsx/",
+                   sc_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### South Dakota
+
+```{r}
+# Data upload 
+
+sd_files <- list.files("Data Sets/South Dakota Data Source/South Dakota xlsx/")
+
+for(i in 1:length(sc_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("sd1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/South Dakota Data Source/South Dakota xlsx/",
+                   sd_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Tennessee
+
+```{r}
+# Data upload 
+
+tn_files <- list.files("Data Sets/Tennessee Data Source/Tennessee xlsx/")
+
+for(i in 1:length(tn_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("tn1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Tennessee Data Source/Tennessee xlsx/",
+                   tn_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Wisconsin
+
+```{r}
+# Data upload 
+
+wi_files <- list.files("Data Sets/Wisconsin Data Source/Wisconsin xlsx/")
+
+for(i in 1:length(sc_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("wi1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Wisconsin Data Source/Wisconsin xlsx/",
+                   wi_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Wyoming
+
+```{r}
+# Data upload 
+
+wy_files <- list.files("Data Sets/Wyoming Data Source/Wyoming xlsx/")
+
+for(i in 1:length(sc_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("wy1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Wyoming Data Source/Wyoming xlsx/",
+                   wy_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+## Combine by Year
+
+### 2011
+
+```{r}
+state <- c("al", "fl", "ga", "ks", "ms", "nc", "sc", "sd", "tn", "wi", "wy")
+
+for(i in state){
+
+# put all data frames into list
+# nc11df_list <- list(nc11_dfA, nc11_dfB, nc11_dfC, nc11_dfD)
+assign(paste0(i, "11df_list"),
+       list(get(paste0(i, "11_dfB")), 
+            get(paste0(i, "11_dfC")), 
+            get(paste0(i, "11_dfD")), 
+            get(paste0(i, "11_dfE"))))
+    
+# merge all data frames in list
+#nc11D_df <- nc11df_list %>% reduce(full_join, by = 'X1')
+
+assign(paste0(i, "11D_df"),
+       (get(paste0(i, "11df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+# nc11D_df <- nc11D_df[-2, !duplicated(as.list(nc11D_df))]
+
+assign(paste0(i, "11D_df2"), get(paste0(i, "11D_df")) %>%
+         slice(-2) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "11D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "11D_newnames"), paste(
+             slice(get(paste0(i, "11D_df2")), 1),
+             slice(get(paste0(i, "11D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "11D_df3"), get(paste0(i, "11D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "11_df"), 
+       setnames(get(paste0(i, "11D_df3")), 
+                colnames(get(paste0(i, "11D_df2"))), 
+                get(paste0(i, "11D_newnames"))))
+
+# Add Year
+Year <- 2011
+assign(paste0(i, "11_df"), cbind(get(paste0(i, "11_df")), Year))
+
+
+}
+
+
+```
+
+
+
