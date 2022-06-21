@@ -16,6 +16,7 @@ library(readr)
 library(readxl)
 library(tidyverse)
 library(openxlsx)
+library(purrr)
 
 ```
 
@@ -384,7 +385,13 @@ tn_lst <- list(tn11_df, tn12_df, tn13_df, tn14_df, tn15_df, tn16_df, tn17_df, tn
 
 tn_df <- rbindlist(tn_lst, fill = TRUE)
 
-write_csv(tn_df, "Data Sets/Tennessee_all.csv")
+# remove variables with missing years
+tn_df2 <- tn_df %>% 
+  discard(~sum(is.na(.x))/length(.x)* 100 >=11.11)
+
+write_csv(tn_df2, "Data Sets/Tennessee_all.csv")
+
+
 
 ```
 
@@ -753,7 +760,11 @@ wi_lst <- list(wi11_df, wi12_df, wi13_df, wi14_df, wi15_df, wi16_df, wi17_df, wi
 
 wi_df <- rbindlist(wi_lst, fill = TRUE)
 
-write_csv(wi_df, "Data Sets/Wisconsin_all.csv")
+# remove variables with missing years
+wi_df2 <- wi_df %>% 
+  discard(~sum(is.na(.x))/length(.x)* 100 >=11.11)
+
+write_csv(wi_df2, "Data Sets/Wisconsin_all.csv")
 
 ```
 
@@ -1122,9 +1133,66 @@ wy_lst <- list(wy11_df, wy12_df, wy13_df, wy14_df, wy15_df, wy16_df, wy17_df, wy
 
 wy_df <- rbindlist(wy_lst, fill = TRUE)
 
-wy_df2  <- select(sort(current_vars()))
+# remove variables with missing years
+wy_df2 <- wy_df %>% 
+  discard(~sum(is.na(.x))/length(.x)* 100 >=11.11)
 
-write_csv(wy_df, "Data Sets/Wyoming_all.csv")
+write_csv(wy_df2, "Data Sets/Wyoming_all.csv")
 
 ```
 
+### other
+
+```{r}
+library(purrr)
+
+wy_df2 <- wy_df %>% 
+  discard(~sum(is.na(.x))/length(.x)* 100 >=11)
+
+colnames(wy_df2)
+(((nrow(wy_df) - 9) /9) + 9 )/nrow(wy_df)
+
+(22)/nrow(wy_df)
+```
+
+```{r}
+tn_df3 <- tn_df %>% 
+  discard(~sum(is.na(.x))/length(.x)* 100 >=15)
+
+na_count <-sapply(tn_df3, function(y) sum(is.na(y)))
+na_count
+
+is.na(wy_df$po)
+```
+
+```{r}
+colnames(wy_df2)
+```
+
+
+```{r}
+wy_name <- colnames(wy_df2)
+wi_name <- colnames(wi_df2)
+tn_name <- colnames(tn_df2)
+ks_name <- colnames(ks_df2)
+
+wi13_name <- colnames(wi13_df)
+wi12_name <- colnames(wi12_df)
+
+setdiff(wi_name, ks_name)
+
+wy_df2 <- wy_df[, which(colMeans(!is.na(wy_df)) > 0.5)]
+
+wy_df[, c(wy_df2)]
+
+colnames(wy_df2)
+```
+
+```{r}
+(is.na(tn_df$`Adult smoking.% Smokers`))
+```
+
+zz
+```{r}
+
+```

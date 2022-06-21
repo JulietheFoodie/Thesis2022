@@ -279,10 +279,14 @@ for(i in 1:length(sc_files)) {
 
 ## Combine by Year
 
+```{r}
+state <- c("al", "fl", "ga", "ks", "ms", "nc", "sc", "sd", "tn", "wi", "wy")
+```
+
+
 ### 2011
 
 ```{r}
-state <- c("al", "fl", "ga", "ks", "ms", "nc", "sc", "sd", "tn", "wi", "wy")
 
 for(i in state){
 
@@ -336,5 +340,409 @@ assign(paste0(i, "11_df"), cbind(get(paste0(i, "11_df")), Year))
 
 ```
 
+### 2012
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "12df_list"),
+       list(get(paste0(i, "12_dfB")), 
+            get(paste0(i, "12_dfC")), 
+            get(paste0(i, "12_dfD")), 
+            get(paste0(i, "12_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "12D_df"),
+       (get(paste0(i, "12df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "12D_df2"), get(paste0(i, "12D_df")) %>%
+         slice(-2) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "12D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "12D_newnames"), paste(
+             slice(get(paste0(i, "12D_df2")), 1),
+             slice(get(paste0(i, "12D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "12D_df3"), get(paste0(i, "12D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "12_df"), 
+       setnames(get(paste0(i, "12D_df3")), 
+                colnames(get(paste0(i, "12D_df2"))), 
+                get(paste0(i, "12D_newnames"))))
+
+# Add Year
+Year <- 2012
+assign(paste0(i, "12_df"), cbind(get(paste0(i, "12_df")), Year))
+
+
+}
+
+
+```
+
+### 2013
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "13df_list"),
+       list(get(paste0(i, "13_dfB")), 
+            get(paste0(i, "13_dfC")), 
+            get(paste0(i, "13_dfD")), 
+            get(paste0(i, "13_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "13D_df"),
+       (get(paste0(i, "13df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "13D_df2"), get(paste0(i, "13D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "13D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "13D_newnames"), paste(
+             slice(get(paste0(i, "13D_df2")), 1),
+             slice(get(paste0(i, "13D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "13D_df3"), get(paste0(i, "13D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "13_df"), 
+       setnames(get(paste0(i, "13D_df3")), 
+                colnames(get(paste0(i, "13D_df2"))), 
+                get(paste0(i, "13D_newnames"))))
+
+# Add Year
+Year <- 2013
+assign(paste0(i, "13_df"), cbind(get(paste0(i, "13_df")), Year))
+
+
+}
+
+
+```
+
+### 2014
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "14df_list"),
+       list(get(paste0(i, "14_dfB")), 
+            get(paste0(i, "14_dfC")), 
+            get(paste0(i, "14_dfD")), 
+            get(paste0(i, "14_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "14D_df"),
+       (get(paste0(i, "14df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "14D_df2"), get(paste0(i, "14D_df")) %>%
+         slice(-c(2, 3, 4)) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "14D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "14D_newnames"), paste(
+             slice(get(paste0(i, "14D_df2")), 1),
+             slice(get(paste0(i, "14D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "14D_df3"), get(paste0(i, "14D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "14_df"), 
+       setnames(get(paste0(i, "14D_df3")), 
+                colnames(get(paste0(i, "14D_df2"))), 
+                get(paste0(i, "14D_newnames"))))
+
+# Add Year
+Year <- 2014
+assign(paste0(i, "14_df"), cbind(get(paste0(i, "14_df")), Year))
+
+
+}
+
+
+```
+
+### 2015
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "15df_list"),
+       list(get(paste0(i, "15_dfB")), 
+            get(paste0(i, "15_dfC")), 
+            get(paste0(i, "15_dfD")), 
+            get(paste0(i, "15_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "15D_df"),
+       (get(paste0(i, "15df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "15D_df2"), get(paste0(i, "15D_df")) %>%
+         slice(-c(2, 3, 4)) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "15D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "15D_newnames"), paste(
+             slice(get(paste0(i, "15D_df2")), 1),
+             slice(get(paste0(i, "15D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "15D_df3"), get(paste0(i, "15D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "15_df"), 
+       setnames(get(paste0(i, "15D_df3")), 
+                colnames(get(paste0(i, "15D_df2"))), 
+                get(paste0(i, "15D_newnames"))))
+
+# Add Year
+Year <- 2015
+assign(paste0(i, "15_df"), cbind(get(paste0(i, "15_df")), Year))
+
+
+}
+
+
+```
+
+
+### 2016
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "16df_list"),
+       list(get(paste0(i, "16_dfB")), 
+            get(paste0(i, "16_dfC")), 
+            get(paste0(i, "16_dfD")), 
+            get(paste0(i, "16_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "16D_df"),
+       (get(paste0(i, "16df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "16D_df2"), get(paste0(i, "16D_df")) %>%
+         slice(-c(2, 3, 4)) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "16D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "16D_newnames"), paste(
+             slice(get(paste0(i, "16D_df2")), 1),
+             slice(get(paste0(i, "16D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "16D_df3"), get(paste0(i, "16D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "16_df"), 
+       setnames(get(paste0(i, "16D_df3")), 
+                colnames(get(paste0(i, "16D_df2"))), 
+                get(paste0(i, "16D_newnames"))))
+
+# Add Year
+Year <- 2016
+assign(paste0(i, "16_df"), cbind(get(paste0(i, "16_df")), Year))
+
+
+}
+
+
+```
+
+### 2017
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "17df_list"),
+       list(get(paste0(i, "17_dfB")), 
+            get(paste0(i, "17_dfC")), 
+            get(paste0(i, "17_dfD")), 
+            get(paste0(i, "17_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "17D_df"),
+       (get(paste0(i, "17df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "17D_df2"), get(paste0(i, "17D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "17D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "17D_newnames"), paste(
+             slice(get(paste0(i, "17D_df2")), 1),
+             slice(get(paste0(i, "17D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "17D_df3"), get(paste0(i, "17D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "17_df"), 
+       setnames(get(paste0(i, "17D_df3")), 
+                colnames(get(paste0(i, "17D_df2"))), 
+                get(paste0(i, "17D_newnames"))))
+
+# Add Year
+Year <- 2017
+assign(paste0(i, "17_df"), cbind(get(paste0(i, "17_df")), Year))
+
+
+}
+
+
+```
+
+### 2018
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "18df_list"),
+       list(get(paste0(i, "18_dfB")), 
+            get(paste0(i, "18_dfC")), 
+            get(paste0(i, "18_dfD")), 
+            get(paste0(i, "18_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "18D_df"),
+       (get(paste0(i, "18df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "18D_df2"), get(paste0(i, "18D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "18D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "18D_newnames"), paste(
+             slice(get(paste0(i, "18D_df2")), 1),
+             slice(get(paste0(i, "18D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "18D_df3"), get(paste0(i, "18D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "18_df"), 
+       setnames(get(paste0(i, "18D_df3")), 
+                colnames(get(paste0(i, "18D_df2"))), 
+                get(paste0(i, "18D_newnames"))))
+
+# Add Year
+Year <- 2018
+assign(paste0(i, "18_df"), cbind(get(paste0(i, "18_df")), Year))
+
+
+}
+
+
+```
+
+### 2019
+
+```{r}
+
+for(i in state){
+
+# put all data frames into list
+assign(paste0(i, "19df_list"),
+       list(get(paste0(i, "19_dfB")), 
+            get(paste0(i, "19_dfC")), 
+            get(paste0(i, "19_dfD")), 
+            get(paste0(i, "19_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "19D_df"),
+       (get(paste0(i, "19df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "19D_df2"), get(paste0(i, "19D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "19D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "19D_newnames"), paste(
+             slice(get(paste0(i, "19D_df2")), 1),
+             slice(get(paste0(i, "19D_df2")), 2),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "19D_df3"), get(paste0(i, "19D_df2")) %>%
+         slice(-c(1, 2))) 
+ 
+# add new column names
+assign(paste0(i, "19_df"), 
+       setnames(get(paste0(i, "19D_df3")), 
+                colnames(get(paste0(i, "19D_df2"))), 
+                get(paste0(i, "19D_newnames"))))
+
+# Add Year
+Year <- 2019
+assign(paste0(i, "19_df"), cbind(get(paste0(i, "19_df")), Year))
+
+
+}
+
+
+```
 
 

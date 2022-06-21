@@ -47,7 +47,7 @@ dem_df2$`Black Pop`
 demSm1_df <- filter(dem_df, dem_df$Expand == 1)
 demSm0_df <- filter(dem_df, dem_df$Expand == 0)
 
-sum(demSm2_df$`Black Pop`)
+# sum(demSm2_df$`Black Pop`)
 
 ```
 
