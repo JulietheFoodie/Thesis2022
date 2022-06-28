@@ -294,7 +294,7 @@ for(i in 1:length(ms_files)) {
 
 ```
 
-### Missouri
+### Missouri cleaned
 
 ```{r}
 
@@ -707,7 +707,7 @@ all_df12 <- do.call(rbind, datalist12)
 
 ```
 
-### 2013
+### 2013 *Need to delete cell in files
 
 ```{r}
 
@@ -770,11 +770,11 @@ state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms
 
 state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
 
-setdiff(colnames(al13_df), colnames(ak13_df))
+setdiff(colnames(al17_df), colnames(mo17_df))
 ```
 
 
-### 2014
+### 2014 *need to delete cell in files
 
 ```{r}
 
@@ -797,19 +797,20 @@ assign(paste0(i, "14D_df"),
 
 # Delete Duplicate Columns and row (unsure where row came from)
 assign(paste0(i, "14D_df2"), get(paste0(i, "14D_df")) %>%
-         slice(-c(2, 3, 4)) %>%
          select(-which(duplicated(as.list(get(paste0(i, "14D_df"))))))
          )
 
 # merge first two rows for new column names
+
+
  assign(paste0(i, "14D_newnames"), paste(
              slice(get(paste0(i, "14D_df2")), 1),
-             slice(get(paste0(i, "14D_df2")), 2),
+             slice(get(paste0(i, "14D_df2")), 3),
              sep = '.'))
  
  # delete old column rows
 assign(paste0(i, "14D_df3"), get(paste0(i, "14D_df2")) %>%
-         slice(-c(1, 2))) 
+         slice(-c(1, 2, 3))) 
  
 # add new column names
 assign(paste0(i, "14_df"), 
@@ -831,6 +832,7 @@ datalist14[[i]] <- get(paste0(i, "14_df"))
 # Combine Datasets
 all_df14 <- do.call(rbind, datalist14)
 
+setdiff(colnames(al14_df), colnames(ak14_df))
 ```
 
 ### 2015
@@ -947,7 +949,7 @@ datalist16[[i]] <- get(paste0(i, "16_df"))
 }
 
 # Combine Datasets
-all_df16 <- do.call(rbind, datalist16)
+all_df16 <- do.call(bind_rows, datalist16)
 
 ```
 
@@ -1004,9 +1006,10 @@ datalist17[[i]] <- get(paste0(i, "17_df"))
 }
 
 # Combine Datasets
-all_df17 <- do.call(rbind, datalist17)
+all_df17 <- do.call(bind_rows, datalist17)
 
-
+# Drop redundent columns
+all_df17 <- subset(all_df17, select = -c(NA.County...20, NA.County...3))
 
 ```
 
@@ -1138,4 +1141,4 @@ for(i in 1:9){
 
 
 
-17, 16, 14, 13
+17, 14, 13
