@@ -40,6 +40,29 @@ for(i in 1:length(al_files)) {
 
 ```
 
+### Arkansas
+
+```{r}
+
+ak_files <- list.files("Data Sets/Arkansas Data Source/Arkansas xlsx/")
+
+for(i in 1:length(ak_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ak1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Arkansas Data Source/Arkansas xlsx/",
+                   ak_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
 ### Florida 
 
 ```{r}
@@ -87,6 +110,75 @@ for(i in 1:length(ga_files)) {
 
 ```
 
+### Illinois
+
+```{r}
+
+il_files <- list.files("Data Sets/Illinois Data Source/Illinois xlsx/")
+
+for(i in 1:length(il_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("il1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Illinois Data Source/Illinois xlsx/",
+                   il_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Indiana
+
+```{r}
+
+in_files <- list.files("Data Sets/Indiana Data Source/Indiana xlsx/")
+
+for(i in 1:length(in_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("in1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Indiana Data Source/Indiana xlsx/",
+                   in_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Iowa
+
+```{r}
+
+ia_files <- list.files("Data Sets/Iowa Data Source/Iowa xlsx/")
+
+for(i in 1:length(ia_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ia1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Iowa Data Source/Iowa xlsx/",
+                   ia_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
 ### Kansas
 
 ```{r}
@@ -101,6 +193,75 @@ for(i in 1:length(ks_files)) {
   # Read and store data frames
          read.xlsx(paste0("Data Sets/Kansas Data Source/Kansas xlsx/",
                    ks_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Kentucky
+
+```{r}
+
+ky_files <- list.files("Data Sets/Kentucky Data Source/Kentucky xlsx/")
+
+for(i in 1:length(ky_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ky1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Kentucky Data Source/Kentucky xlsx/",
+                   ky_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Louisiana 
+
+```{r}
+
+la_files <- list.files("Data Sets/Louisiana Data Source/Louisiana xlsx/")
+
+for(i in 1:length(la_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("la1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Louisiana Data Source/Louisiana xlsx/",
+                   la_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Minnesota
+
+```{r}
+
+mn_files <- list.files("Data Sets/Minnesota Data Source/Minnesota xlsx/")
+
+for(i in 1:length(mn_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("mn1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Minnesota Data Source/Minnesota xlsx/",
+                   mn_files[i]), 
                    sheet = (j),
                    fillMergedCells = TRUE, 
                    colNames = FALSE))
@@ -133,6 +294,75 @@ for(i in 1:length(ms_files)) {
 
 ```
 
+### Missouri
+
+```{r}
+
+mo_files <- list.files("Data Sets/Missouri Data Source/Missouri xlsx/")
+
+for(i in 1:length(mo_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("mo1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Missouri Data Source/Missouri xlsx/",
+                   mo_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Montana
+
+```{r}
+
+mt_files <- list.files("Data Sets/Montana Data Source/Montana xlsx/")
+
+for(i in 1:length(mt_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("mt1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Montana Data Source/Montana xlsx/",
+                   mt_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### Nebraska
+
+```{r}
+
+ne_files <- list.files("Data Sets/Nebraska Data Source/Nebraska xlsx/")
+
+for(i in 1:length(ne_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("ne1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Nebraska Data Source/Nebraska xlsx/",
+                   ne_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
 ### North Carolina
 
 ```{r}
@@ -148,6 +378,30 @@ for(i in 1:length(nc_files)) {
   # Read and store data frames
          read.xlsx(paste0("Data Sets/North Carolina Data Source/North Carolina xlsx/",
                    nc_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### North Dakota
+
+```{r}
+# Data upload 
+
+nd_files <- list.files("Data Sets/North Dakota Data Source/North Dakota xlsx/")
+
+for(i in 1:length(nd_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("nd1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/North Dakota Data Source/North Dakota xlsx/",
+                   nd_files[i]), 
                    sheet = (j),
                    fillMergedCells = TRUE, 
                    colNames = FALSE))
@@ -229,6 +483,53 @@ for(i in 1:length(tn_files)) {
 
 ```
 
+### Virginia
+
+```{r}
+
+va_files <- list.files("Data Sets/Virginia Data Source/Virginia xlsx/")
+
+for(i in 1:length(va_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("va1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Virginia Data Source/Virginia xlsx/",
+                   va_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
+### West Virginia
+
+```{r}
+# Data upload 
+
+wv_files <- list.files("Data Sets/West Virginia Data Source/West Virginia xlsx/")
+
+for(i in 1:length(wv_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("wv1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/West Virginia Data Source/West Virginia xlsx/",
+                   wv_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+```
+
 ### Wisconsin
 
 ```{r}
@@ -236,7 +537,7 @@ for(i in 1:length(tn_files)) {
 
 wi_files <- list.files("Data Sets/Wisconsin Data Source/Wisconsin xlsx/")
 
-for(i in 1:length(sc_files)) { 
+for(i in 1:length(wi_files)) { 
   for (j in 2:5) {
     
   # Head of for-loop
@@ -260,7 +561,7 @@ for(i in 1:length(sc_files)) {
 
 wy_files <- list.files("Data Sets/Wyoming Data Source/Wyoming xlsx/")
 
-for(i in 1:length(sc_files)) { 
+for(i in 1:length(wy_files)) { 
   for (j in 2:5) {
     
   # Head of for-loop
@@ -277,10 +578,13 @@ for(i in 1:length(sc_files)) {
 
 ```
 
+
+
+
 ## Combine by Year
 
 ```{r}
-state <- c("al", "fl", "ga", "ks", "ms", "nc", "sc", "sd", "tn", "wi", "wy")
+state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
 ```
 
 
@@ -288,10 +592,11 @@ state <- c("al", "fl", "ga", "ks", "ms", "nc", "sc", "sd", "tn", "wi", "wy")
 
 ```{r}
 
+datalist11 = list()
+
 for(i in state){
 
 # put all data frames into list
-# nc11df_list <- list(nc11_dfA, nc11_dfB, nc11_dfC, nc11_dfD)
 assign(paste0(i, "11df_list"),
        list(get(paste0(i, "11_dfB")), 
             get(paste0(i, "11_dfC")), 
@@ -299,16 +604,12 @@ assign(paste0(i, "11df_list"),
             get(paste0(i, "11_dfE"))))
     
 # merge all data frames in list
-#nc11D_df <- nc11df_list %>% reduce(full_join, by = 'X1')
-
 assign(paste0(i, "11D_df"),
        (get(paste0(i, "11df_list")) %>% 
           reduce(full_join, by = 'X1')
         ))
 
 # Delete Duplicate Columns and row (unsure where row came from)
-# nc11D_df <- nc11D_df[-2, !duplicated(as.list(nc11D_df))]
-
 assign(paste0(i, "11D_df2"), get(paste0(i, "11D_df")) %>%
          slice(-2) %>%
          select(-which(duplicated(as.list(get(paste0(i, "11D_df"))))))
@@ -335,7 +636,14 @@ Year <- 2011
 assign(paste0(i, "11_df"), cbind(get(paste0(i, "11_df")), Year))
 
 
+# List of Datasets
+datalist11[[i]] <- get(paste0(i, "11_df"))
+
+
 }
+
+# Combine Datasets
+all_df11 <- do.call(rbind, datalist11)
 
 
 ```
@@ -343,6 +651,8 @@ assign(paste0(i, "11_df"), cbind(get(paste0(i, "11_df")), Year))
 ### 2012
 
 ```{r}
+
+datalist12 = list()
 
 for(i in state){
 
@@ -386,14 +696,22 @@ Year <- 2012
 assign(paste0(i, "12_df"), cbind(get(paste0(i, "12_df")), Year))
 
 
+# List of Datasets
+datalist12[[i]] <- get(paste0(i, "12_df"))
+
+
 }
 
+# Combine Datasets
+all_df12 <- do.call(rbind, datalist12)
 
 ```
 
 ### 2013
 
 ```{r}
+
+datalist13 = list()
 
 for(i in state){
 
@@ -436,14 +754,31 @@ Year <- 2013
 assign(paste0(i, "13_df"), cbind(get(paste0(i, "13_df")), Year))
 
 
+# List of Datasets
+datalist13[[i]] <- get(paste0(i, "13_df"))
+
+
 }
 
+# Combine Datasets
+all_df13 <- do.call(bind_rows, datalist13)
 
 ```
+
+```{r}
+state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
+
+state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
+
+setdiff(colnames(al13_df), colnames(ak13_df))
+```
+
 
 ### 2014
 
 ```{r}
+
+datalist14 = list()
 
 for(i in state){
 
@@ -487,14 +822,22 @@ Year <- 2014
 assign(paste0(i, "14_df"), cbind(get(paste0(i, "14_df")), Year))
 
 
+# List of Datasets
+datalist14[[i]] <- get(paste0(i, "14_df"))
+
+
 }
 
+# Combine Datasets
+all_df14 <- do.call(rbind, datalist14)
 
 ```
 
 ### 2015
 
 ```{r}
+
+datalist15 = list()
 
 for(i in state){
 
@@ -538,8 +881,14 @@ Year <- 2015
 assign(paste0(i, "15_df"), cbind(get(paste0(i, "15_df")), Year))
 
 
+# List of Datasets
+datalist15[[i]] <- get(paste0(i, "15_df"))
+
+
 }
 
+# Combine Datasets
+all_df15 <- do.call(rbind, datalist15)
 
 ```
 
@@ -547,6 +896,8 @@ assign(paste0(i, "15_df"), cbind(get(paste0(i, "15_df")), Year))
 ### 2016
 
 ```{r}
+
+datalist16 = list()
 
 for(i in state){
 
@@ -589,15 +940,22 @@ assign(paste0(i, "16_df"),
 Year <- 2016
 assign(paste0(i, "16_df"), cbind(get(paste0(i, "16_df")), Year))
 
+# List of Datasets
+datalist16[[i]] <- get(paste0(i, "16_df"))
+
 
 }
 
+# Combine Datasets
+all_df16 <- do.call(rbind, datalist16)
 
 ```
 
 ### 2017
 
 ```{r}
+
+datalist17 = list()
 
 for(i in state){
 
@@ -639,8 +997,15 @@ assign(paste0(i, "17_df"),
 Year <- 2017
 assign(paste0(i, "17_df"), cbind(get(paste0(i, "17_df")), Year))
 
+# List of Datasets
+datalist17[[i]] <- get(paste0(i, "17_df"))
+
 
 }
+
+# Combine Datasets
+all_df17 <- do.call(rbind, datalist17)
+
 
 
 ```
@@ -648,6 +1013,8 @@ assign(paste0(i, "17_df"), cbind(get(paste0(i, "17_df")), Year))
 ### 2018
 
 ```{r}
+
+datalist18 = list()
 
 for(i in state){
 
@@ -689,15 +1056,22 @@ assign(paste0(i, "18_df"),
 Year <- 2018
 assign(paste0(i, "18_df"), cbind(get(paste0(i, "18_df")), Year))
 
+# List of Datasets
+datalist18[[i]] <- get(paste0(i, "18_df"))
+
 
 }
 
+# Combine Datasets
+all_df18 <- do.call(rbind, datalist18)
 
 ```
 
 ### 2019
 
 ```{r}
+
+datalist19 = list()
 
 for(i in state){
 
@@ -727,7 +1101,7 @@ assign(paste0(i, "19D_df2"), get(paste0(i, "19D_df")) %>%
  
  # delete old column rows
 assign(paste0(i, "19D_df3"), get(paste0(i, "19D_df2")) %>%
-         slice(-c(1, 2))) 
+        slice(-c(1, 2))) 
  
 # add new column names
 assign(paste0(i, "19_df"), 
@@ -739,10 +1113,29 @@ assign(paste0(i, "19_df"),
 Year <- 2019
 assign(paste0(i, "19_df"), cbind(get(paste0(i, "19_df")), Year))
 
+# List of Datasets
+datalist19[[i]] <- get(paste0(i, "19_df"))
+
 
 }
 
+# Combine Datasets
+all_df19 <- do.call(rbind, datalist19)
 
 ```
 
+## Combine all data years
 
+```{r}
+datalist <- list()
+
+for(i in 1:9){
+  
+  datalist[[i]] <- get(paste0("all_df1", i))
+  
+}
+```
+
+
+
+17, 16, 14, 13
