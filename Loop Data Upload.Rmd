@@ -12,7 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Libraries
 
 ```{r}
-library("tidyverse")
+library(tidyverse)
+library(janitor)
 ```
 
 ## States Data Upload
@@ -43,35 +44,11 @@ al13_dfF <- read.xlsx("Data Sets/Alabama Data Source/Alabama xlsx/AnyConv.com__2
     sheet = 6,
     fillMergedCells = TRUE, colNames = FALSE)
 
-```
 
-### Arkansas
-
-```{r}
-
-ak_files <- list.files("Data Sets/Arkansas Data Source/Arkansas xlsx/")
-
-for(i in 1:length(ak_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("ak1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Arkansas Data Source/Arkansas xlsx/",
-                   ak_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-ak13_dfF <- read.xlsx("Data Sets/Arkansas Data Source/Arkansas xlsx/AnyConv.com__2013 County Health Ranking Arkansas Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
 
 ```
+
+
 
 ### Florida 
 
@@ -270,33 +247,7 @@ ky13_dfF <- read.xlsx("Data Sets/Kentucky Data Source/Kentucky xlsx/AnyConv.com_
 
 ```
 
-### Louisiana 
 
-```{r}
-
-la_files <- list.files("Data Sets/Louisiana Data Source/Louisiana xlsx/")
-
-for(i in 1:length(la_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("la1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Louisiana Data Source/Louisiana xlsx/",
-                   la_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-la13_dfF <- read.xlsx("Data Sets/Louisiana Data Source/Louisiana xlsx/AnyConv.com__2013 County Health Ranking Louisiana Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-```
 
 ### Minnesota
 
@@ -383,61 +334,6 @@ mo13_dfF <- read.xlsx("Data Sets/Missouri Data Source/Missouri xlsx/AnyConv.com_
 
 ```
 
-### Montana
-
-```{r}
-
-mt_files <- list.files("Data Sets/Montana Data Source/Montana xlsx/")
-
-for(i in 1:length(mt_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("mt1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Montana Data Source/Montana xlsx/",
-                   mt_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-mt13_dfF <- read.xlsx("Data Sets/Montana Data Source/Montana xlsx/AnyConv.com__2013 County Health Ranking Montana Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-```
-
-### Nebraska
-
-```{r}
-
-ne_files <- list.files("Data Sets/Nebraska Data Source/Nebraska xlsx/")
-
-for(i in 1:length(ne_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("ne1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Nebraska Data Source/Nebraska xlsx/",
-                   ne_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-ne13_dfF <- read.xlsx("Data Sets/Nebraska Data Source/Nebraska xlsx/AnyConv.com__2013 County Health Ranking Nebraska Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-```
 
 ### North Carolina
 
@@ -584,33 +480,7 @@ tn13_dfF <- read.xlsx("Data Sets/Tennessee Data Source/Tennessee xlsx/AnyConv.co
 
 ```
 
-### Virginia
 
-```{r}
-
-va_files <- list.files("Data Sets/Virginia Data Source/Virginia xlsx/")
-
-for(i in 1:length(va_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("va1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Virginia Data Source/Virginia xlsx/",
-                   va_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-va13_dfF <- read.xlsx("Data Sets/Virginia Data Source/Virginia xlsx/AnyConv.com__2013 County Health Ranking Virginia Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-```
 
 ### West Virginia
 
@@ -769,6 +639,11 @@ all_df11 <- do.call(rbind, datalist11)
 # lowercase column names
 names(all_df11) <- tolower(names(all_df11))
 
+  
+ all_df11$demographics.population <- all_df11[[147]]
+ 
+ all_df11$demographics.populationB <- all_df11[[155]]
+
 # Find Unique Column Names
 unique_names <- unique(colnames(all_df11))
 
@@ -837,6 +712,10 @@ all_df12 <- do.call(rbind, datalist12)
 # lowercase column names
 names(all_df12) <- tolower(names(all_df12))
 
+all_df12$demographics.population <- all_df12[[156]]
+
+all_df12$demographics.populationB <- all_df12[[164]]
+
 # Find Unique Column Names
 unique_names <- unique(colnames(all_df12))
 
@@ -844,9 +723,10 @@ unique_names <- unique(colnames(all_df12))
 all_df12 <- all_df12[unique_names]
 
 
+
 ```
 
-### 2013 *Need to delete cell in files
+### 2013 
 
 ```{r}
 
@@ -906,6 +786,7 @@ all_df13 <- do.call(bind_rows, datalist13)
 # lowercase column names
 names(all_df13) <- tolower(names(all_df13))
 
+
 # Find Unique Column Names
 unique_names <- unique(colnames(all_df13))
 
@@ -914,14 +795,6 @@ all_df13 <- all_df13[unique_names]
 
 
 
-```
-
-```{r}
-state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
-
-state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
-
-#setdiff(colnames(al17_df), colnames(mo17_df))
 ```
 
 
@@ -992,7 +865,7 @@ unique_names <- unique(colnames(all_df14))
 # Keep Only Unique Column Names
 all_df14 <- all_df14[unique_names]
 
-#setdiff(colnames(al14_df), colnames(ak14_df))
+
 ```
 
 ### 2015
@@ -1129,7 +1002,7 @@ unique_names <- unique(colnames(all_df16))
 # Keep Only Unique Column Names
 all_df16 <- all_df16[unique_names]
 
-#setdiff(colnames(al16_df), colnames(ak16_df))
+
 ```
 
 ### 2017
@@ -1185,19 +1058,32 @@ datalist17[[i]] <- get(paste0(i, "17_df"))
 }
 
 # Combine Datasets
-all_df17 <- do.call(bind_rows, datalist17)
+
+all_df17 <- do.call(bind_rows, datalist17)  
+
+all_df17 <-  all_df17 %>% 
+  mutate(`na.county` = 
+           coalesce(all_df17$`NA.County`,
+                    all_df17$`NA.County...20` )) 
+
 
 # Drop redundant columns
-all_df17 <- subset(all_df17, select = -c(NA.County...20, NA.County...3))
+all_df17 <- subset(all_df17, select = -c(NA.County, NA.County...20, NA.County...3))
 
 # lowercase column names
 names(all_df17) <- tolower(names(all_df17))
+
+
+
 
 # Find Unique Column Names
 unique_names <- unique(colnames(all_df17))
 
 # Keep Only Unique Column Names
 all_df17 <- all_df17[unique_names]
+
+
+
 
 ```
 
@@ -1347,22 +1233,25 @@ for(i in 1:9){
 }
 # Combine Datasets
 all_df <- do.call(bind_rows, datalist)
+
+all_df$pover
 ```
 
-## Additional Data Cleaning
+## Final Data Cleaning
 
 ```{r}
+# add treatment Column 
+state <- all_df$na.state
 
-# Delete extra columns 
+all_df$treatment <- ifelse(state == "Arkansas" | state == "Iowa"| state == "Kentucky" | state == "Louisiana" | state == "Minnesota" | state == "Montana" | state == "North Dakota" | state == "Nebraska" | state == "West Virginia" | state == "Virginia", "1", "0" )
+
+
+
+# Combine and delete extra columns 
 all_df2 <- all_df %>% 
-  relocate(year, .before = 'health outcomes.z-score') %>%
+  relocate(c(year, treatment), .before = 'health outcomes.z-score') %>%
   rename(county = na.county, state = na.state, fips = na.fips) %>%
-  subset (select = -c( `access to healthy foods.# zip codes...150`,
-                       `access to healthy foods.# zip codes...204`,
-                       `access to healthy foods.% healthy foods...151`,
-                       `access to healthy foods.% healthy foods...205`,
-                       `access to healthy foods.zip codes with healthy foods...149`,
-                       `access to healthy foods.zip codes with healthy foods...203`, 
+  subset (select = -c(
                        `children in poverty.% children in poverty - black`,
                        `children in poverty.% children in poverty (black)`,
                        `children in poverty.% children in poverty - hispanic`,
@@ -1374,63 +1263,97 @@ all_df2 <- all_df %>%
                        `driving alone to work.% drive alone (hispanic)`,
                        `driving alone to work.% drive alone - hispanic`,
                        `driving alone to work.% drive alone (white)`,
-                       `driving alone to work.% drive alone - white`
-                       )) %>% 
+                       `driving alone to work.% drive alone - white`,
+                       `severe housing problems.# household with severe problems`,
+                       `severe housing problems.# households with severe problems`,
+                       `demographics.# american indian/ alaskan native`,
+                       `demographics.# american indian/alaskan native`,
+                       `demographics.# native hawaiian/ other pacific islander`,
+                       `demographics.# native hawaiian/other pacific islander`
+                       )) %>%
   mutate(`severe housing problems.# household` = 
-           coalesce(all_df$`severe housing problems.# household with severe problems`, 
-            all_df$`severe housing problems.# households with severe problems` )) %>% 
+           coalesce(all_df$`severe housing problems.# household with severe problems`,
+                    all_df$`severe housing problems.# households with severe problems` )) %>% 
   mutate(`demographics.# american indian/ native alaskan` = 
-           coalesce(all_df$`demographics.# american indian/ alaskan native`, 
-            all_df$`demographics.# american indian/alaskan native` )) %>% 
+           coalesce(all_df$`demographics.# american indian/ alaskan native`,
+                    all_df$`demographics.# american indian/alaskan native` )) %>% 
   mutate(`demographics.# native hawaiian/ pacific islander` = 
-           coalesce(all_df$`demographics.# native hawaiian/ other pacific islander`, 
-            all_df$`demographics.# native hawaiian/other pacific islander` )) %>% 
-  mutate(`demographics.% american indian/ native alaskan` = 
-           coalesce(all_df$`demographics.% american indian/ alaskan native`, 
-            all_df$`demographics.% american indian/alaskan native` )) %>% 
-  mutate(`demographics.% native hawaiian/ pacific islander` = 
-           coalesce(all_df$`demographics.% native hawaiian/ other pacific islander`, 
-            all_df$`demographics.% native hawaiian/other pacific islander` )) %>% 
-  mutate(demographics.populationA = 
-           coalesce(all_df$`demographics.population`, 
-            all_df$`demographics.population...164` )) 
+           coalesce(all_df$`demographics.# native hawaiian/ other pacific islander`,
+                    all_df$`demographics.# native hawaiian/other pacific islander` )) %>% 
+  
+  mutate(`children in poverty.% children in poverty- white` = 
+           coalesce(all_df$`children in poverty.% children in poverty - white`,
+                    all_df$`children in poverty.% children in poverty (white)` )) %>% 
+  mutate(`children in poverty.% children in poverty- black` = 
+           coalesce(all_df$`children in poverty.% children in poverty - black`,
+                    all_df$`children in poverty.% children in poverty (black)` )) %>% 
+  mutate(`children in poverty.% children in poverty- hispanic` = 
+           coalesce(all_df$`children in poverty.% children in poverty - hispanic`,
+                    all_df$`children in poverty.% children in poverty (hispanic)` )) %>% 
+  
+  mutate(`driving alone to work.% drive alone- white` = 
+           coalesce(all_df$`driving alone to work.% drive alone - white`,
+                    all_df$`driving alone to work.% drive alone (white)` )) %>% 
+  mutate(`driving alone to work.% drive alone- black` = 
+           coalesce(all_df$`driving alone to work.% drive alone - black`,
+                    all_df$`driving alone to work.% drive alone (black)` )) %>% 
+  mutate(`driving alone to work.% drive alone- hispanic` = 
+           coalesce(all_df$`driving alone to work.% drive alone - hispanic`,
+                    all_df$`driving alone to work.% drive alone (hispanic)` ))
+
+
+
 
 
 ```
 
+### Divide by State vs County 
+
+```{r}
+state_df <- all_df2 %>% 
+  filter(is.na(county))
+
+# remove empty columns
+state_df <- state_df[ , colSums(is.na(state_df)) < nrow(state_df)] 
+
+county_df <- all_df2 %>% 
+  filter(!is.na(county))
+
+```
 
 ```{r}
 
 
-test_df <- all_df %>% select(na.state, na.county, year, demographics.population, demographics.population...147, demographics.population...156, demographics.population...155, demographics.population...164 )
+state <- c("ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
 
-# Delete Columns 
-# NA.NA...1, NA.NA...2, NA.NA...3
+state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
 
-# all_df$`Access to healthy foods.% Healthy Foods...205`
-
-sum(is.na(all_df2$demographics.population...147))
-
-all_df2$demographics.populationA
-
+#setdiff(colnames(al17_df), colnames(mo17_df))
 ```
 
- 
+##### Expanded and Using
+* Arkansas 2014 - non traditional waiver
+* Iowa 2014
+* Kentucky 2014
+* Louisiana 2016 
+* Minnesota 2014- full
+* Montana 2016 - non traditional
+* North Dakota 2014
+* Nebraska 2020 
+* West Virginia 2014
+* Virginia 2019 
 
-```{r}
-colnames(all_df2[ , order(names(all_df2))])
-```
+##### Not Expanded
+* Alabama
+* Florida
+* Georgia 
+* Kansas
 
-Demographics.Population: 6154
-Demographics.Population...164: 16405
-Demographics.Population...155: 16405
-Demographics.Population...156: 16405
+* Mississippi
+* North Carolina Need
+* South Dakota
+* South Carolina 
 
-`Access to healthy foods.# Zip Codes`: 16410
-`Access to healthy foods.Zip Codes with Healthy Foods...149`: all na
-`Access to healthy foods.# Zip Codes...150`: all na
-
-`Access to healthy foods.% Healthy Food`: 16410
-`Access to healthy foods.% Healthy Foods...151`: all na
-`Access to healthy foods.% Healthy Foods...205`: 16410
-
+* Tennessee
+* Wisconsin
+* Wyoming
