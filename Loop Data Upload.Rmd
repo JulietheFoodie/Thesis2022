@@ -665,11 +665,11 @@ wy13_dfF <- read.xlsx("Data Sets/Wyoming Data Source/Wyoming xlsx/AnyConv.com__2
 ## Combine Data by Year
 
 ```{r}
-state_all <- c("al", "fl", "ga", "il", "in", "ks", "ky", "md", "mn", "ms", "nv", "nm", "nc", "nd", "oh", "sc", "sd", "tn", "wv", "wi", "wy")
+state <- c("al", "fl", "ga", "il", "in", "ks", "ky", "md", "mn", "ms", "nv", "nm", "nc", "nd", "oh", "sc", "sd", "tn", "wv", "wi", "wy")
 
-state1 <- c("al", "fl", "ga", "il", "in", "ks", "ky",  "mn", "ms",   "nc", "nd",  "sc", "sd", "tn", "wv", "wi", "wy")
+stateA <- c("al", "fl", "ga", "il", "in", "ks", "ky",  "mn", "ms",   "nc", "nd",  "sc", "sd", "tn", "wv", "wi", "wy")
 
-state2 <- c("de", "md", "nv", "nm", "oh")
+stateB <- c("de", "md", "nv", "nm", "oh")
 # "de"
 ```
 
@@ -745,6 +745,8 @@ unique_names <- unique(colnames(all_df11))
 # Keep Only Unique Column Names
 all_df11 <- all_df11[unique_names]
 
+# Time Indicator
+all_df11$time <- 0
 
 ```
 
@@ -754,7 +756,7 @@ all_df11 <- all_df11[unique_names]
 
 datalist12A = list()
 
-for(i in state1){
+for(i in stateA){
 
 # put all data frames into list
 assign(paste0(i, "12df_list"),
@@ -817,13 +819,15 @@ unique_names <- unique(colnames(all_df12A))
 # Keep Only Unique Column Names
 all_df12A <- all_df12A[unique_names]
 
+
+
 ```
 
 ```{r}
 
 datalist12B = list()
 
-for(i in state2){
+for(i in stateB){
 
 # put all data frames into list
 assign(paste0(i, "12df_list"),
@@ -890,7 +894,10 @@ all_df12B <- all_df12B[unique_names]
 
 
 ```{r}
-alll_df12 <- rbind(all_df12A, all_df12B)
+all_df12 <- rbind(all_df12A, all_df12B)
+
+# Time Indicator
+all_df12$time <- 0
 ```
 
 
@@ -970,9 +977,9 @@ all_df13 <- all_df13[unique_names]
 
 ```{r}
 
-datalist14 = list()
+datalist14A = list()
 
-for(i in state){
+for(i in stateA){
 
 # put all data frames into list
 assign(paste0(i, "14df_list"),
@@ -1016,25 +1023,101 @@ assign(paste0(i, "14_df"), cbind(get(paste0(i, "14_df")), Year))
 
 
 # List of Datasets
-datalist14[[i]] <- get(paste0(i, "14_df"))
+datalist14A[[i]] <- get(paste0(i, "14_df"))
 
 
 }
 
 # Combine Datasets
-all_df14 <- do.call(rbind, datalist14)
+all_df14A <- do.call(rbind, datalist14A, )
 
 # lowercase column names
-names(all_df14) <- tolower(names(all_df14))
+names(all_df14A) <- tolower(names(all_df14A))
 
 # Find Unique Column Names
-unique_names <- unique(colnames(all_df14))
+unique_names <- unique(colnames(all_df14A))
 
 # Keep Only Unique Column Names
-all_df14 <- all_df14[unique_names]
+all_df14A <- all_df14A[unique_names]
 
 
 ```
+
+```{r}
+
+datalist14B = list()
+
+for(i in stateB){
+
+# put all data frames into list
+assign(paste0(i, "14df_list"),
+       list(get(paste0(i, "14_dfB")), 
+            get(paste0(i, "14_dfC")), 
+            get(paste0(i, "14_dfD")), 
+            get(paste0(i, "14_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "14D_df"),
+       (get(paste0(i, "14df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "14D_df2"), get(paste0(i, "14D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "14D_df"))))))
+         )
+
+# merge first two rows for new column names
+
+
+ assign(paste0(i, "14D_newnames"), paste(
+             slice(get(paste0(i, "14D_df2")), 1),
+             slice(get(paste0(i, "14D_df2")), 3),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "14D_df3"), get(paste0(i, "14D_df2")) %>%
+         slice(-c(1, 2, 3))) 
+ 
+# add new column names
+assign(paste0(i, "14_df"), 
+       setnames(get(paste0(i, "14D_df3")), 
+                colnames(get(paste0(i, "14D_df2"))), 
+                get(paste0(i, "14D_newnames"))))
+
+# Add Year
+Year <- 2014
+assign(paste0(i, "14_df"), cbind(get(paste0(i, "14_df")), Year))
+
+
+# List of Datasets
+datalist14B[[i]] <- get(paste0(i, "14_df"))
+
+
+}
+
+# Combine Datasets
+all_df14B <- do.call(rbind, datalist14B, )
+
+# lowercase column names
+names(all_df14B) <- tolower(names(all_df14B))
+
+# Find Unique Column Names
+unique_names <- unique(colnames(all_df14B))
+
+# Keep Only Unique Column Names
+all_df14B <- all_df14B[unique_names]
+
+
+```
+
+```{r}
+all_df14 <- rbind(all_df14A, all_df14B)
+
+# Time Indicator
+all_df14$time <- 1
+```
+
 
 ### 2015
 
@@ -1101,6 +1184,9 @@ unique_names <- unique(colnames(all_df15))
 
 # Keep Only Unique Column Names
 all_df15 <- all_df15[unique_names]
+
+# Time Indicator
+all_df15$time <- 1
 
 ```
 
@@ -1170,7 +1256,8 @@ unique_names <- unique(colnames(all_df16))
 # Keep Only Unique Column Names
 all_df16 <- all_df16[unique_names]
 
-
+# Time Indicator
+all_df16$time <- 1
 ```
 
 ### 2017
@@ -1252,7 +1339,8 @@ unique_names <- unique(colnames(all_df17))
 all_df17 <- all_df17[unique_names]
 
 
-
+# Time Indicator
+all_df17$time <- 1
 
 ```
 
@@ -1320,6 +1408,8 @@ unique_names <- unique(colnames(all_df18))
 # Keep Only Unique Column Names
 all_df18 <- all_df18[unique_names]
 
+# Time Indicator
+all_df18$time <- 1
 ```
 
 ### 2019
@@ -1386,7 +1476,8 @@ unique_names <- unique(colnames(all_df19))
 # Keep Only Unique Column Names
 all_df19 <- all_df19[unique_names]
 
-
+# Time Indicator
+all_df19$time <- 1
 ```
 
 ## Combine all data years
@@ -1408,11 +1499,12 @@ all_df <- do.call(bind_rows, datalist)
 
 ## Final Data Cleaning
 
+
 ```{r}
 # add treatment Column 
 state <- all_df$na.state
 
-all_df$treatment <- ifelse(state == "Arkansas" | state == "Iowa"| state == "Kentucky" | state == "Louisiana" | state == "Minnesota" | state == "Montana" | state == "North Dakota" | state == "Nebraska" | state == "West Virginia" | state == "Virginia", "1", "0" )
+all_df$treatment <- ifelse(state == "Alabama" | state == "Florida"| state == "Georgia" | state == "Kansas" | state == "Mississippi" | state == "North Carolina" | state == "South Dakota" | state == "South Carolina" | state == "Tennessee" | state == "Wisconsin"| state == "Wyoming", "0", "1" )
 
 
 
@@ -1475,6 +1567,8 @@ all_df2 <- all_df %>%
 
 
 ```
+
+
 
 ### Divide by State vs County 
 
