@@ -18,6 +18,8 @@ library(janitor)
 
 ## States Data Upload
 
+Must convert to xlsx and delete * definition in years 2013 and 2014 for code to run
+
 ### Alabama
 
 ```{r}
@@ -48,7 +50,35 @@ al13_dfF <- read.xlsx("Data Sets/Alabama Data Source/Alabama xlsx/AnyConv.com__2
 
 ```
 
+### Delaware
 
+```{r}
+
+de_files <- list.files("Data Sets/Delaware Data Source/Delaware xlsx/")
+
+for(i in 1:length(de_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("de1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Delaware Data Source/Delaware xlsx/",
+                   de_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+# Extra sheet in year 2013
+de13_dfF <- read.xlsx("Data Sets/Delaware Data Source/Delaware xlsx/AnyConv.com__2013 County Health Ranking Delaware Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+
+
+```
 
 ### Florida 
 
@@ -163,33 +193,7 @@ in13_dfF <- read.xlsx("Data Sets/Indiana Data Source/Indiana xlsx/AnyConv.com__2
 
 ```
 
-### Iowa
 
-```{r}
-
-ia_files <- list.files("Data Sets/Iowa Data Source/Iowa xlsx/")
-
-for(i in 1:length(ia_files)) { 
-  for (j in 2:5) {
-    
-  # Head of for-loop
-  assign(paste0("ia1", i, "_df", LETTERS[j]),                                   
-  # Read and store data frames
-         read.xlsx(paste0("Data Sets/Iowa Data Source/Iowa xlsx/",
-                   ia_files[i]), 
-                   sheet = (j),
-                   fillMergedCells = TRUE, 
-                   colNames = FALSE))
-    
-  }
-}
-
-# Extra sheet in year 2013
-ia13_dfF <- read.xlsx("Data Sets/Iowa Data Source/Iowa xlsx/AnyConv.com__2013 County Health Ranking Iowa Data - v1_0.xlsx", 
-    sheet = 6,
-    fillMergedCells = TRUE, colNames = FALSE)
-
-```
 
 ### Kansas
 
@@ -247,7 +251,34 @@ ky13_dfF <- read.xlsx("Data Sets/Kentucky Data Source/Kentucky xlsx/AnyConv.com_
 
 ```
 
+### Maryland
 
+```{r}
+
+md_files <- list.files("Data Sets/Maryland Data Source/Maryland xlsx/")
+
+for(i in 1:length(md_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("md1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Maryland Data Source/Maryland xlsx/",
+                   md_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+# Extra sheet in year 2013
+md13_dfF <- read.xlsx("Data Sets/Maryland Data Source/Maryland xlsx/AnyConv.com__2013 County Health Ranking Maryland Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+
+```
 
 ### Minnesota
 
@@ -306,20 +337,21 @@ ms13_dfF <- read.xlsx("Data Sets/Mississippi Data Source/Mississippi xlsx/AnyCon
 
 ```
 
-### Missouri cleaned
+
+### Nevada
 
 ```{r}
 
-mo_files <- list.files("Data Sets/Missouri Data Source/Missouri xlsx/")
+nv_files <- list.files("Data Sets/Nevada Data Source/Nevada xlsx/")
 
-for(i in 1:length(mo_files)) { 
+for(i in 1:length(nv_files)) { 
   for (j in 2:5) {
     
   # Head of for-loop
-  assign(paste0("mo1", i, "_df", LETTERS[j]),                                   
+  assign(paste0("nv1", i, "_df", LETTERS[j]),                                   
   # Read and store data frames
-         read.xlsx(paste0("Data Sets/Missouri Data Source/Missouri xlsx/",
-                   mo_files[i]), 
+         read.xlsx(paste0("Data Sets/Nevada Data Source/Nevada xlsx/",
+                   nv_files[i]), 
                    sheet = (j),
                    fillMergedCells = TRUE, 
                    colNames = FALSE))
@@ -328,12 +360,41 @@ for(i in 1:length(mo_files)) {
 }
 
 # Extra sheet in year 2013
-mo13_dfF <- read.xlsx("Data Sets/Missouri Data Source/Missouri xlsx/AnyConv.com__2013 County Health Ranking Missouri Data - v1_0.xlsx", 
+nv13_dfF <- read.xlsx("Data Sets/Nevada Data Source/Nevada xlsx/AnyConv.com__2013 County Health Ranking Nevada Data - v1_0.xlsx", 
     sheet = 6,
     fillMergedCells = TRUE, colNames = FALSE)
 
+
 ```
 
+### New Mexico
+
+```{r}
+
+nm_files <- list.files("Data Sets/New Mexico Data Source/New Mexico xlsx/")
+
+for(i in 1:length(nm_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("nm1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/New Mexico Data Source/New Mexico xlsx/",
+                   nm_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+# Extra sheet in year 2013
+nm13_dfF <- read.xlsx("Data Sets/New Mexico Data Source/New Mexico xlsx/AnyConv.com__2013 County Health Ranking New Mexico Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+
+```
 
 ### North Carolina
 
@@ -388,6 +449,35 @@ for(i in 1:length(nd_files)) {
 
 # Extra sheet in year 2013
 nd13_dfF <- read.xlsx("Data Sets/North Dakota Data Source/North Dakota xlsx/AnyConv.com__2013 County Health Ranking North Dakota Data - v1_0.xlsx", 
+    sheet = 6,
+    fillMergedCells = TRUE, colNames = FALSE)
+
+```
+
+### Ohio
+
+```{r}
+# Data upload 
+
+oh_files <- list.files("Data Sets/Ohio Data Source/Ohio xlsx/")
+
+for(i in 1:length(oh_files)) { 
+  for (j in 2:5) {
+    
+  # Head of for-loop
+  assign(paste0("oh1", i, "_df", LETTERS[j]),                                   
+  # Read and store data frames
+         read.xlsx(paste0("Data Sets/Ohio Data Source/Ohio xlsx/",
+                   oh_files[i]), 
+                   sheet = (j),
+                   fillMergedCells = TRUE, 
+                   colNames = FALSE))
+    
+  }
+}
+
+# Extra sheet in year 2013
+oh13_dfF <- read.xlsx("Data Sets/Ohio Data Source/Ohio xlsx/AnyConv.com__2013 County Health Ranking Ohio Data - v1_0.xlsx", 
     sheet = 6,
     fillMergedCells = TRUE, colNames = FALSE)
 
@@ -575,7 +665,12 @@ wy13_dfF <- read.xlsx("Data Sets/Wyoming Data Source/Wyoming xlsx/AnyConv.com__2
 ## Combine Data by Year
 
 ```{r}
-state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
+state_all <- c("al", "fl", "ga", "il", "in", "ks", "ky", "md", "mn", "ms", "nv", "nm", "nc", "nd", "oh", "sc", "sd", "tn", "wv", "wi", "wy")
+
+state1 <- c("al", "fl", "ga", "il", "in", "ks", "ky",  "mn", "ms",   "nc", "nd",  "sc", "sd", "tn", "wv", "wi", "wy")
+
+state2 <- c("de", "md", "nv", "nm", "oh")
+# "de"
 ```
 
 
@@ -657,9 +752,9 @@ all_df11 <- all_df11[unique_names]
 
 ```{r}
 
-datalist12 = list()
+datalist12A = list()
 
-for(i in state){
+for(i in state1){
 
 # put all data frames into list
 assign(paste0(i, "12df_list"),
@@ -701,30 +796,103 @@ assign(paste0(i, "12_df"), cbind(get(paste0(i, "12_df")), Year))
 
 
 # List of Datasets
-datalist12[[i]] <- get(paste0(i, "12_df"))
+datalist12A[[i]] <- get(paste0(i, "12_df"))
 
 
 }
 
 # Combine Datasets
-all_df12 <- do.call(rbind, datalist12)
+all_df12A <- do.call(rbind, datalist12A)
 
 # lowercase column names
-names(all_df12) <- tolower(names(all_df12))
+names(all_df12A) <- tolower(names(all_df12A))
 
-all_df12$demographics.population <- all_df12[[156]]
+all_df12A$demographics.population <- all_df12A[[156]]
 
-all_df12$demographics.populationB <- all_df12[[164]]
+all_df12A$demographics.populationB <- all_df12A[[164]]
 
 # Find Unique Column Names
-unique_names <- unique(colnames(all_df12))
+unique_names <- unique(colnames(all_df12A))
 
 # Keep Only Unique Column Names
-all_df12 <- all_df12[unique_names]
-
-
+all_df12A <- all_df12A[unique_names]
 
 ```
+
+```{r}
+
+datalist12B = list()
+
+for(i in state2){
+
+# put all data frames into list
+assign(paste0(i, "12df_list"),
+       list(get(paste0(i, "12_dfB")), 
+            get(paste0(i, "12_dfC")), 
+            get(paste0(i, "12_dfD")), 
+            get(paste0(i, "12_dfE"))))
+    
+# merge all data frames in list
+assign(paste0(i, "12D_df"),
+       (get(paste0(i, "12df_list")) %>% 
+          reduce(full_join, by = 'X1')
+        ))
+
+# Delete Duplicate Columns and row (unsure where row came from)
+assign(paste0(i, "12D_df2"), get(paste0(i, "12D_df")) %>%
+         select(-which(duplicated(as.list(get(paste0(i, "12D_df"))))))
+         )
+
+# merge first two rows for new column names
+ assign(paste0(i, "12D_newnames"), paste(
+             slice(get(paste0(i, "12D_df2")), 1),
+             slice(get(paste0(i, "12D_df2")), 3),
+             sep = '.'))
+ 
+ # delete old column rows
+assign(paste0(i, "12D_df3"), get(paste0(i, "12D_df2")) %>%
+         slice(-c(1, 2, 3))) 
+ 
+# add new column names
+assign(paste0(i, "12_df"), 
+       setnames(get(paste0(i, "12D_df3")), 
+                colnames(get(paste0(i, "12D_df2"))), 
+                get(paste0(i, "12D_newnames"))))
+
+# Add Year
+Year <- 2012
+assign(paste0(i, "12_df"), cbind(get(paste0(i, "12_df")), Year))
+
+
+# List of Datasets
+datalist12B[[i]] <- get(paste0(i, "12_df"))
+
+
+}
+
+# Combine Datasets
+all_df12B <- do.call(rbind, datalist12B)
+
+# lowercase column names
+names(all_df12B) <- tolower(names(all_df12B))
+
+all_df12B$demographics.population <- all_df12B[[156]]
+
+all_df12B$demographics.populationB <- all_df12B[[164]]
+
+# Find Unique Column Names
+unique_names <- unique(colnames(all_df12B))
+
+# Keep Only Unique Column Names
+all_df12B <- all_df12B[unique_names]
+
+```
+
+
+```{r}
+alll_df12 <- rbind(all_df12A, all_df12B)
+```
+
 
 ### 2013 
 
@@ -781,7 +949,7 @@ datalist13[[i]] <- get(paste0(i, "13_df"))
 }
 
 # Combine Datasets
-all_df13 <- do.call(bind_rows, datalist13)
+all_df13 <- do.call(rbind, datalist13)
 
 # lowercase column names
 names(all_df13) <- tolower(names(all_df13))
@@ -1061,14 +1229,15 @@ datalist17[[i]] <- get(paste0(i, "17_df"))
 
 all_df17 <- do.call(bind_rows, datalist17)  
 
-all_df17 <-  all_df17 %>% 
-  mutate(`na.county` = 
-           coalesce(all_df17$`NA.County`,
-                    all_df17$`NA.County...20` )) 
+# uneeded
+# all_df17 <-  all_df17 %>% 
+#   mutate(na.county = 
+#            coalesce(all_df17$na.cou,
+#                     all_df17$`NA.County...20` )) 
 
 
-# Drop redundant columns
-all_df17 <- subset(all_df17, select = -c(NA.County, NA.County...20, NA.County...3))
+# Drop redundant columns (uneeded)
+#all_df17 <- subset(all_df17, select = -c(NA.County, NA.County...20, NA.County...3))
 
 # lowercase column names
 names(all_df17) <- tolower(names(all_df17))
@@ -1234,7 +1403,7 @@ for(i in 1:9){
 # Combine Datasets
 all_df <- do.call(bind_rows, datalist)
 
-all_df$pover
+
 ```
 
 ## Final Data Cleaning
@@ -1321,19 +1490,24 @@ county_df <- all_df2 %>%
 
 ```
 
+## Export
+
 ```{r}
+write.csv(state_df, "state_complete.csv")
 
-
-state <- c("ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
-
-state <- c("al", "ak", "fl", "ga", "il", "in", "ia", "ks", "ky", "la", "mn", "ms", "mo", "mt", "ne", "nc", "nd", "sc", "sd", "tn", "va", "wv", "wi", "wy")
-
-#setdiff(colnames(al17_df), colnames(mo17_df))
+write.csv(county_df, "county_complete.csv")
 ```
+
+#### Need to use
+
+State == "Illinois"| State == "Minnesota" |   State == "North Dakota" | State == "Maryland" | State == "Delaware" | State == "Ohio" | State == "New Mexico"
+
+* Add Maryland Delaware and  ohio new mexico
+
 
 ##### Expanded and Using
 * Arkansas 2014 - non traditional waiver
-* Iowa 2014
+* Iowa 2014 - non traditional waiver
 * Kentucky 2014
 * Louisiana 2016 
 * Minnesota 2014- full
